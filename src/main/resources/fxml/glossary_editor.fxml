@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ru.romzhel.app.controllers.GlossaryEditorController">
+   <children>
+      <TextField fx:id="tfName" layoutX="78.0" layoutY="28.0" prefHeight="25.0" prefWidth="504.0"
+                 AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="28.0"/>
+      <Label layoutX="15.0" layoutY="32.0" text="Название"/>
+      <ListView fx:id="lvItems" layoutX="76.0" layoutY="70.0" prefHeight="209.0" prefWidth="504.0"
+                AnchorPane.bottomAnchor="121.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="20.0"
+                AnchorPane.topAnchor="70.0"/>
+      <TextField fx:id="tfNew" layoutX="76.0" layoutY="287.0" prefHeight="25.0" prefWidth="415.0"
+                 AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="109.0"/>
+      <Button fx:id="btnAdd" layoutX="498.0" layoutY="287.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0"
+              text="Добавить" AnchorPane.bottomAnchor="88.0" AnchorPane.rightAnchor="20.0"/>
+      <Button fx:id="btnSave" layoutX="429.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0"
+              prefWidth="144.0" text="Сохранить" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="27.0"/>
+   </children>
+</AnchorPane>

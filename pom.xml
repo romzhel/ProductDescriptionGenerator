@@ -11,6 +11,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <poi.version>3.17</poi.version>
         <!--        <poi.version>4.1.2</poi.version>-->
         <app.date>07.01.2021</app.date>

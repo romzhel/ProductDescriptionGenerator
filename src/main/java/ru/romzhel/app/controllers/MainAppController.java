@@ -1,52 +1,108 @@
 package ru.romzhel.app.controllers;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import ru.romzhel.app.nodes.*;
 import ru.romzhel.app.utils.Dialogs;
-import ru.romzhel.app.utils.ExcelInputFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainAppController implements Initializable {
-    private TreeItem<Object> rootTreeItem = new TreeItem<>("Обзор");
-    private TreeItem<Object> templatesTreeItem = new TreeItem<>("Шаблоны");
-    private TreeItem<Object> glossariesTreeItem = new TreeItem<>("Словари");
-    private TreeItem<Object> filesTreeItem = new TreeItem<>("Файлы");
-
+    private final RootNode rootNode = new RootNode();
+    private final TemplateRootNode templateRootNode = new TemplateRootNode();
+    private final GlossaryRootNode glossaryRootNode = new GlossaryRootNode();
+    private final FileRootNode fileRootNode = new FileRootNode();
 
     @FXML
-    TreeView<Object> tvNavi;
+    TreeView<Node<?>> tvNavi;
     @FXML
     TextField tf;
-
+    @FXML
+    AnchorPane apWorkPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        rootTreeItem.getChildren().addAll(templatesTreeItem, glossariesTreeItem, filesTreeItem);
-        tvNavi.setRoot(rootTreeItem);
+        rootNode.getChildren().addAll(templateRootNode, glossaryRootNode, fileRootNode);
+        tvNavi.setRoot(rootNode);
+        tvNavi.setShowRoot(false);
 
         tvNavi.setOnMouseClicked(event -> {
-            Object obj = tvNavi.getFocusModel().getFocusedItem();
-            System.out.println(obj + ", " + ((TreeItem) obj).getValue().getClass().getName());
+            TreeItem<Node<?>> node = tvNavi.getFocusModel().getFocusedItem();
+
+            if (node == null) {
+                return;
+            }
+
+            String workPanePath = ((Node<?>) node).getWorkPanePath();
+            if (workPanePath != null && !workPanePath.isEmpty()) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource(workPanePath));
+                    AnchorPane anchorPane = loader.load();
+                    apWorkPane.getChildren().clear();
+                    apWorkPane.getChildren().addAll(anchorPane.getChildren());
+
+                    NodeController<MainAppController> controller = loader.getController();
+                    controller.injectMainController(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            System.out.println(node.getValue().toString() + ", " + (node.getClass().getSimpleName()));
         });
 
-        tvNavi.setOnMousePressed(e -> System.out.println("source: pressed"));
-        tvNavi.setOnMouseDragged(e -> System.out.println("source: dragged"));
-        tvNavi.setOnDragDetected(e -> System.out.println("source: drag detected"));
-        tvNavi.setOnMouseReleased(e -> System.out.println("source: released"));
+        tvNavi.setCellFactory(new Callback<TreeView<Node<?>>, TreeCell<Node<?>>>() {
+            public TreeCell<Node<?>> call(TreeView<Node<?>> param) {
+                final TreeCell<Node<?>> source = new TreeCell<Node<?>>() {
+                    @Override
+                    protected void updateItem(Node<?> item, boolean empty) {
+                        super.updateItem(item, empty);
 
-        tf.setOnMouseDragEntered(e -> System.out.println("target: drag entered"));
-        tf.setOnMouseDragOver(e -> System.out.println("target: drag over"));
-        tf.setOnMouseDragReleased(e -> System.out.println("target: drag released"));
-        tf.setOnMouseDragExited(e -> System.out.println("target: drag exited"));
+                        if (item != null) {
+                            setText(item.toString());
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
 
+                source.setOnDragDetected(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        System.out.println("onDragDetected");
+
+                        Dragboard dragboard = source.startDragAndDrop(TransferMode.LINK);
+
+                        ClipboardContent content = new ClipboardContent();
+                        content.putString(source.getText());
+                        dragboard.setContent(content);
+
+                        System.out.println("added: " + source.getText());
+
+                        event.consume();
+                    }
+                });
+
+                return source;
+            }
+        });
 
     }
 
@@ -54,15 +110,15 @@ public class MainAppController implements Initializable {
         try {
             Stage stage = (Stage) tvNavi.getScene().getWindow();
             List<File> files = new Dialogs().selectAnyFile(stage, "Выбор файла", Dialogs.EXCEL_FILES, null);
-            ExcelInputFile excelInputFile = new ExcelInputFile();
-            excelInputFile.open(files.get(0));
 
-            TreeItem<Object> fileItem = new TreeItem<>(excelInputFile);
-            for (int i = 0; i < excelInputFile.getTitlesIndexes().size(); i++) {
-                fileItem.getChildren().add(new TreeItem<>(excelInputFile.getTitlesIndexes().get(i)));
+            for (int f = 0; f < files.size(); f++) {
+                FileNode fileNode = new FileNode(files.get(f));
+                for (int i = 0; i < fileNode.getNode().getTitlesIndexes().size(); i++) {
+                    fileNode.getChildren().add(new PropertyNode(fileNode.getNode().getTitlesIndexes().get(i)));
+                }
+                fileRootNode.getChildren().add(fileNode);
             }
 
-            filesTreeItem.getChildren().add(fileItem);
         } catch (Exception e) {
             e.printStackTrace();
         }
