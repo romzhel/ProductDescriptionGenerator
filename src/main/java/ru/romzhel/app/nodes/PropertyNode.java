@@ -4,11 +4,11 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TreeItem;
 
 public class PropertyNode extends TreeItem<Node<?>> implements Node<String> {
-    private String node;
+    private String data;
 
     public PropertyNode(String propertyName) throws Exception {
         super();
-        node = propertyName;
+        data = propertyName;
         setValue(this);
     }
 
@@ -23,13 +23,18 @@ public class PropertyNode extends TreeItem<Node<?>> implements Node<String> {
     }
 
     @Override
-    public String getNode() {
-        return node;
+    public String getData() {
+        return data;
+    }
+
+    @Override
+    public void setData(String data) {
+        this.data = data;
     }
 
     @Override
     public String toString() {
-        return node;
+        return data;
     }
 
     @Override

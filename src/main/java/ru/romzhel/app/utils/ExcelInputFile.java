@@ -1,16 +1,21 @@
 package ru.romzhel.app.utils;
 
-import lombok.Getter;
+import lombok.Data;
 import org.apache.poi.ss.usermodel.Row;
 import ru.romzhel.app.entities.ProductGroup;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-@Getter
+
+@Data
+@XmlRootElement(name = "file")
 public class ExcelInputFile extends ExcelFile {
     private Map<Integer, String> titlesIndexes;
+    @XmlElement
     private Map<String, Integer> titles;
     private Map<String, ProductGroup> productGroupsMap;
 
@@ -27,6 +32,8 @@ public class ExcelInputFile extends ExcelFile {
         }
 
         productGroupsMap = new HashMap<>();
+
+        close();
     }
 
     private Map<String, ProductGroup> extractGroups(int groupColumn) {

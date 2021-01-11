@@ -6,17 +6,17 @@
             AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
             AnchorPane.topAnchor="30.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ru.romzhel.app.controllers.TemplateEditorController">
-   <children>
-      <TextField fx:id="tfTemplateLink" layoutX="104.0" layoutY="76.0" prefHeight="25.0" prefWidth="447.0"
-                 AnchorPane.leftAnchor="104.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="76.0"/>
-      <TextArea fx:id="taContent" layoutX="28.0" layoutY="118.0" prefHeight="227.0" prefWidth="545.0" wrapText="true"
-                AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="27.0"
-                AnchorPane.topAnchor="118.0"/>
-      <TextField fx:id="tfTemplateName" layoutX="104.0" layoutY="28.0" prefHeight="25.0" prefWidth="447.0"
-                 AnchorPane.leftAnchor="104.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="28.0"/>
-      <Label layoutX="39.0" layoutY="32.0" text="Название"/>
-      <Label layoutX="39.0" layoutY="80.0" text="Привязка"/>
-      <Button fx:id="btnSave" layoutX="429.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0"
-              prefWidth="144.0" text="Сохранить" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="27.0"/>
-   </children>
+    <children>
+        <TextField fx:id="tfTemplateLink" layoutX="141.0" layoutY="76.0" prefHeight="25.0" prefWidth="299.0"
+                   AnchorPane.leftAnchor="141.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="76.0"/>
+        <TextArea fx:id="taContent" layoutX="28.0" layoutY="118.0" prefHeight="227.0" prefWidth="545.0" wrapText="true"
+                  AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="27.0"
+                  AnchorPane.topAnchor="118.0"/>
+        <TextField fx:id="tfTemplateName" layoutX="141.0" layoutY="28.0" prefHeight="25.0" prefWidth="299.0"
+                   AnchorPane.leftAnchor="141.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="28.0"/>
+        <Label layoutX="28.0" layoutY="32.0" text="Название шаблона"/>
+        <Label layoutX="29.0" layoutY="80.0" text="Привязка к файлу"/>
+        <Button fx:id="btnSave" layoutX="429.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="144.0" text="Сохранить" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="27.0"/>
+    </children>
 </AnchorPane>

@@ -7,12 +7,12 @@ import ru.romzhel.app.utils.ExcelInputFile;
 import java.io.File;
 
 public class FileNode extends TreeItem<Node<?>> implements Node<ExcelInputFile> {
-    private ExcelInputFile node;
+    private ExcelInputFile data;
 
     public FileNode(File file) throws Exception {
         super();
-        node = new ExcelInputFile();
-        node.open(file);
+        data = new ExcelInputFile();
+        data.open(file);
         setValue(this);
     }
 
@@ -27,13 +27,18 @@ public class FileNode extends TreeItem<Node<?>> implements Node<ExcelInputFile> 
     }
 
     @Override
-    public ExcelInputFile getNode() {
-        return node;
+    public ExcelInputFile getData() {
+        return data;
+    }
+
+    @Override
+    public void setData(ExcelInputFile data) {
+        this.data = data;
     }
 
     @Override
     public String toString() {
-        return node.getFileName();
+        return data.getFileName();
     }
 
     @Override

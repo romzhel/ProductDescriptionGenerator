@@ -21,8 +21,13 @@ public class GlossaryRootNode extends TreeItem<Node<?>> implements Node<String> 
     }
 
     @Override
-    public String getNode() {
+    public String getData() {
         return "";
+    }
+
+    @Override
+    public void setData(String data) {
+
     }
 
     @Override

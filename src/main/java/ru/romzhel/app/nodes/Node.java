@@ -7,7 +7,9 @@ public interface Node<T> {
 
     ContextMenu getContextMenu();
 
-    T getNode();
+    T getData();
+
+    void setData(T data);
 
     String toString();
 
