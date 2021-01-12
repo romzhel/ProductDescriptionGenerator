@@ -12,6 +12,7 @@ import ru.romzhel.app.entities.DescriptionTemplate;
 import ru.romzhel.app.nodes.Node;
 import ru.romzhel.app.nodes.TemplateNode;
 import ru.romzhel.app.nodes.TemplateRootNode;
+import ru.romzhel.app.services.TemplateService;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -78,10 +79,10 @@ public class TemplateEditorController implements Initializable, NodeController<M
 
             if (instigatorNode instanceof TemplateRootNode) {
                 mainAppController.templateRootNode.getChildren().add(new TemplateNode(descriptionTemplate));
-                mainAppController.templateService.getTemplateMap().put(descriptionTemplate.getName(), descriptionTemplate);
+                TemplateService.getInstance().getTemplateMap().put(descriptionTemplate.getName(), descriptionTemplate);
             } else if (instigatorNode instanceof TemplateNode) {
                 ((TemplateNode) instigatorNode).setData(descriptionTemplate);
-                mainAppController.templateService.getTemplateMap().put(descriptionTemplate.getName(), descriptionTemplate);
+                TemplateService.getInstance().getTemplateMap().put(descriptionTemplate.getName(), descriptionTemplate);
             }
         });
     }

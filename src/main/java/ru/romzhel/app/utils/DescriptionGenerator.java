@@ -1,5 +1,6 @@
 package ru.romzhel.app.utils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
@@ -56,10 +57,11 @@ public class DescriptionGenerator {
                     values.add("!EMPTY!");
                 }
             }
-
-            String description = String.format(parsedContent.get(0), values.toArray());
+            String description = StringUtils.capitalize(String.format(parsedContent.get(0), values.toArray()));
             outputRow = excelOutputFile.sheet.createRow(outputRowIndex++);
-            Cell cell = outputRow.createCell(1, CellType.STRING);
+            Cell cell = outputRow.createCell(0, CellType.STRING);
+            cell.setCellValue(inputRow.getCell(excelInputFile.getTitles().get("Артикул")).toString());
+            cell = outputRow.createCell(1, CellType.STRING);
             cell.setCellValue(description);
         }
 

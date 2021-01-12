@@ -5,10 +5,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import ru.romzhel.app.entities.StringGlossary;
 import ru.romzhel.app.nodes.GlossaryNode;
 import ru.romzhel.app.nodes.GlossaryRootNode;
 import ru.romzhel.app.nodes.Node;
+import ru.romzhel.app.services.GlossaryService;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,9 +45,16 @@ public class GlossaryEditorController implements Initializable, NodeController<M
 
             if (instigatorNode instanceof GlossaryRootNode) {
                 mainAppController.glossaryRootNode.getChildren().add(new GlossaryNode(stringGlossary));
-                mainAppController.glossaryService.getGlossaryMap().put(stringGlossary.getName(), stringGlossary);
+                GlossaryService.getInstance().getGlossaryMap().put(stringGlossary.getName(), stringGlossary);
             } else if (instigatorNode instanceof GlossaryNode) {
                 ((GlossaryNode) instigatorNode).setData(stringGlossary);
+                GlossaryService.getInstance().getGlossaryMap().put(stringGlossary.getName(), stringGlossary);
+            }
+        });
+
+        lvItems.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.DELETE) {
+                lvItems.getItems().remove(lvItems.getSelectionModel().getSelectedItem());
             }
         });
     }

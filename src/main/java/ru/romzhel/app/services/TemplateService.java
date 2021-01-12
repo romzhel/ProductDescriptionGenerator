@@ -13,5 +13,16 @@ import java.util.Map;
 @XmlRootElement(name = "templates")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class TemplateService {
+    private static TemplateService instance;
     private Map<String, DescriptionTemplate> templateMap = new HashMap<>();
+
+    private TemplateService() {
+    }
+
+    public static TemplateService getInstance() {
+        if (instance == null) {
+            instance = new TemplateService();
+        }
+        return instance;
+    }
 }

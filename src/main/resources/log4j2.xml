@@ -5,7 +5,7 @@
     </Properties>
 
     <Appenders>
-        <File name="FILE" fileName="${basePath}/certBase.log" append="true">
+        <File name="FILE" fileName="${basePath}/app.log" append="true">
             <PatternLayout pattern="%d{yyyy-dd-MM HH:mm:ss.SSS} [%-25t] %-5level %logger{36} - %msg%n"/>
         </File>
 
@@ -17,7 +17,7 @@
 
     <Loggers>
         <Root level="trace">
-            <!--            <AppenderRef ref="FILE"/>-->
+            <AppenderRef ref="FILE"/>
             <AppenderRef ref="STDOUT"/>
         </Root>
     </Loggers>

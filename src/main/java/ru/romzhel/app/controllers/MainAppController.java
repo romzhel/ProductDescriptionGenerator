@@ -14,8 +14,6 @@ import javafx.util.Callback;
 import lombok.Data;
 import ru.romzhel.app.nodes.*;
 import ru.romzhel.app.services.ExcelFileService;
-import ru.romzhel.app.services.GlossaryService;
-import ru.romzhel.app.services.TemplateService;
 import ru.romzhel.app.utils.Dialogs;
 import ru.romzhel.app.utils.XMLUtilities;
 
@@ -28,14 +26,10 @@ import java.util.ResourceBundle;
 
 @Data
 public class MainAppController implements Initializable {
-    final RootNode rootNode = new RootNode();
     public final TemplateRootNode templateRootNode = new TemplateRootNode();
     public final GlossaryRootNode glossaryRootNode = new GlossaryRootNode();
     public final FileRootNode fileRootNode = new FileRootNode();
-    public final TemplateService templateService = new TemplateService();
-    public final GlossaryService glossaryService = GlossaryService.getInstance();
-    public final ExcelFileService excelFileService = ExcelFileService.getInstance();
-
+    final RootNode rootNode = new RootNode();
     @FXML
     TreeView<Node<?>> tvNavi;
     @FXML
@@ -121,7 +115,7 @@ public class MainAppController implements Initializable {
                     fileNode.getChildren().add(new PropertyNode(fileNode.getData().getTitlesIndexes().get(i)));
                 }
                 fileRootNode.getChildren().add(fileNode);
-                excelFileService.getFileMap().put(fileNode.getData().getFileName(), fileNode.getData());
+                ExcelFileService.getInstance().getFileMap().put(fileNode.getData().getFileName(), fileNode.getData());
             }
 
         } catch (Exception e) {

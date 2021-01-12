@@ -7,17 +7,19 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ExcelFile {
     public static final Logger logger = LogManager.getLogger(ExcelFile.class);
+    @XmlTransient
     protected Workbook workbook;
+    @XmlTransient
     protected Sheet sheet;
     @XmlElement
     protected File file;

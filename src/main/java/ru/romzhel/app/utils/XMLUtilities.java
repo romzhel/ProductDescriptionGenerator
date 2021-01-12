@@ -51,12 +51,12 @@ public class XMLUtilities {
         if (templateService != null) {
             templateService.getTemplateMap().entrySet().forEach(descriptionTemplateEntry ->
                     mainAppController.templateRootNode.getChildren().add(new TemplateNode(descriptionTemplateEntry.getValue())));
-            mainAppController.templateService.setTemplateMap(templateService.getTemplateMap());
+            TemplateService.getInstance().setTemplateMap(templateService.getTemplateMap());
         }
         if (glossaryService != null) {
             glossaryService.getGlossaryMap().entrySet().forEach(glossaryEntry ->
                     mainAppController.glossaryRootNode.getChildren().add(new GlossaryNode(glossaryEntry.getValue())));
-            mainAppController.glossaryService.setGlossaryMap(glossaryService.getGlossaryMap());
+            GlossaryService.getInstance().setGlossaryMap(glossaryService.getGlossaryMap());
         }
         if (excelFileService != null) {
             excelFileService.getFileMap().entrySet().forEach(fileEntry -> {
@@ -72,14 +72,14 @@ public class XMLUtilities {
                     e.printStackTrace();
                 }
             });
-            mainAppController.excelFileService.setFileMap(excelFileService.getFileMap());
+            ExcelFileService.getInstance().setFileMap(excelFileService.getFileMap());
         }
     }
 
     public static void saveAll(MainAppController mainAppController) throws JAXBException {
-        XMLUtilities.saveToXml(TemplateService.class, TEMPLATE_FILE, mainAppController.templateService);
-        XMLUtilities.saveToXml(GlossaryService.class, GLOSSARY_FILE, mainAppController.glossaryService);
-        XMLUtilities.saveToXml(ExcelFileService.class, FILES_FILE, mainAppController.excelFileService);
+        XMLUtilities.saveToXml(TemplateService.class, TEMPLATE_FILE, TemplateService.getInstance());
+        XMLUtilities.saveToXml(GlossaryService.class, GLOSSARY_FILE, GlossaryService.getInstance());
+        XMLUtilities.saveToXml(ExcelFileService.class, FILES_FILE, ExcelFileService.getInstance());
     }
 
 }
