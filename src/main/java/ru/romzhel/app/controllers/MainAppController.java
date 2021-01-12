@@ -1,5 +1,7 @@
 package ru.romzhel.app.controllers;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,6 +32,7 @@ public class MainAppController implements Initializable {
     public final GlossaryRootNode glossaryRootNode = new GlossaryRootNode();
     public final FileRootNode fileRootNode = new FileRootNode();
     final RootNode rootNode = new RootNode();
+    public BooleanProperty closeProperty = new SimpleBooleanProperty(false);
     @FXML
     TreeView<Node<?>> tvNavi;
     @FXML

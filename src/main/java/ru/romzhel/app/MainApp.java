@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.romzhel.app.controllers.MainAppController;
 import ru.romzhel.app.utils.XMLUtilities;
 
 import javax.xml.bind.JAXBException;
@@ -39,11 +40,13 @@ public class MainApp extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main_app.fxml"));
         Pane root = loader.load();
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/java-keywords.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setTitle("Генератор описаний");
         primaryStage.show();
 
         primaryStage.setOnCloseRequest(event -> {
+            ((MainAppController) loader.getController()).closeProperty.set(true);
             try {
                 XMLUtilities.saveAll(loader.getController());
                 logger.trace("Рабочая среда сохранена");
