@@ -26,12 +26,12 @@ public class StringGlossary implements Glossary {
 
     @Override
     public String getNext() {
-        return glossaryItems.get(++nextIndex % glossaryItems.size());
+        return glossaryItems.get(nextIndex++ % glossaryItems.size());
     }
 
     @Override
     public String getNext(String text) {
-        return glossaryItems.get(++nextIndex % glossaryItems.size());
+        return glossaryItems.get(nextIndex++ % glossaryItems.size());
     }
 
     @Override

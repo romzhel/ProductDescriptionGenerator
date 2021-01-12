@@ -3,6 +3,7 @@ package ru.romzhel.app.nodes;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TreeItem;
 import ru.romzhel.app.entities.StringGlossary;
+import ru.romzhel.app.utils.ContextMenuFactory;
 
 public class GlossaryNode extends TreeItem<Node<?>> implements Node<StringGlossary> {
     private StringGlossary data;
@@ -20,7 +21,7 @@ public class GlossaryNode extends TreeItem<Node<?>> implements Node<StringGlossa
 
     @Override
     public ContextMenu getContextMenu() {
-        return null;
+        return new ContextMenu(ContextMenuFactory.getInstance().createDeleteMenuItem(this));
     }
 
     @Override

@@ -76,4 +76,10 @@ public class XMLUtilities {
         }
     }
 
+    public static void saveAll(MainAppController mainAppController) throws JAXBException {
+        XMLUtilities.saveToXml(TemplateService.class, TEMPLATE_FILE, mainAppController.templateService);
+        XMLUtilities.saveToXml(GlossaryService.class, GLOSSARY_FILE, mainAppController.glossaryService);
+        XMLUtilities.saveToXml(ExcelFileService.class, FILES_FILE, mainAppController.excelFileService);
+    }
+
 }

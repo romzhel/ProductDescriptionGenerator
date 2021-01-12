@@ -33,8 +33,8 @@ public class MainAppController implements Initializable {
     public final GlossaryRootNode glossaryRootNode = new GlossaryRootNode();
     public final FileRootNode fileRootNode = new FileRootNode();
     public final TemplateService templateService = new TemplateService();
-    public final GlossaryService glossaryService = new GlossaryService();
-    public final ExcelFileService excelFileService = new ExcelFileService();
+    public final GlossaryService glossaryService = GlossaryService.getInstance();
+    public final ExcelFileService excelFileService = ExcelFileService.getInstance();
 
     @FXML
     TreeView<Node<?>> tvNavi;
@@ -85,11 +85,15 @@ public class MainAppController implements Initializable {
 
                         if (item != null) {
                             setText(item.toString());
+                            setContextMenu(item.getContextMenu());
                         } else {
                             setText(null);
+                            setContextMenu(null);
                         }
                     }
                 };
+
+                String.format("%s dfdfd %s dfdfdfd %s", new String[]{"", "", ""});
 
                 source.setOnDragDetected(event -> {
                     Dragboard dragboard = source.startDragAndDrop(TransferMode.LINK);
@@ -126,8 +130,6 @@ public class MainAppController implements Initializable {
     }
 
     public void saveToFile() throws JAXBException {
-        XMLUtilities.saveToXml(TemplateService.class, "templates.xml", templateService);
-        XMLUtilities.saveToXml(GlossaryService.class, "glossaries.xml", glossaryService);
-        XMLUtilities.saveToXml(ExcelFileService.class, "files.xml", excelFileService);
+        XMLUtilities.saveAll(this);
     }
 }

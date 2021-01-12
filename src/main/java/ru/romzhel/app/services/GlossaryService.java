@@ -13,5 +13,16 @@ import java.util.Map;
 @XmlRootElement(name = "glossaries")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GlossaryService {
+    private static GlossaryService instance;
     private Map<String, StringGlossary> glossaryMap = new HashMap<>();
+
+    private GlossaryService() {
+    }
+
+    public static GlossaryService getInstance() {
+        if (instance == null) {
+            instance = new GlossaryService();
+        }
+        return instance;
+    }
 }

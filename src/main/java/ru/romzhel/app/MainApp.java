@@ -8,7 +8,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.romzhel.app.utils.XMLUtilities;
 
+import javax.xml.bind.JAXBException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -41,7 +43,15 @@ public class MainApp extends Application {
         primaryStage.setTitle("Генератор описаний");
         primaryStage.show();
 
-        primaryStage.setOnCloseRequest(event -> logger.trace("Выход из приложения"));
+        primaryStage.setOnCloseRequest(event -> {
+            try {
+                XMLUtilities.saveAll(loader.getController());
+                logger.trace("Рабочая среда сохранена");
+            } catch (JAXBException e) {
+                logger.warn("Ошибка сохранения");
+            }
+            logger.trace("Выход из приложения");
+        });
 
 
     }

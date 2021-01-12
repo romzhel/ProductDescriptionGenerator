@@ -13,5 +13,16 @@ import java.util.Map;
 @XmlRootElement(name = "files")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ExcelFileService {
+    private static ExcelFileService instance;
     private Map<String, ExcelFile> fileMap = new HashMap<>();
+
+    private ExcelFileService() {
+    }
+
+    public static ExcelFileService getInstance() {
+        if (instance == null) {
+            instance = new ExcelFileService();
+        }
+        return instance;
+    }
 }

@@ -4,8 +4,8 @@ import lombok.Data;
 import org.apache.poi.ss.usermodel.Row;
 import ru.romzhel.app.entities.ProductGroup;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,13 +14,14 @@ import java.util.Map;
 @Data
 @XmlRootElement(name = "file")
 public class ExcelInputFile extends ExcelFile {
+    @XmlTransient
     private Map<Integer, String> titlesIndexes;
-    @XmlElement
+    @XmlTransient
     private Map<String, Integer> titles;
+    @XmlTransient
     private Map<String, ProductGroup> productGroupsMap;
 
-    @Override
-    public void open(File file) throws Exception {
+    public void analyze(File file) throws Exception {
         super.open(file);
 
         Row firstRow = sheet.getRow(0);

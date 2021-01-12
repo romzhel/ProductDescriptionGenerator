@@ -2,6 +2,7 @@ package ru.romzhel.app.nodes;
 
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TreeItem;
+import ru.romzhel.app.utils.ContextMenuFactory;
 import ru.romzhel.app.utils.ExcelInputFile;
 
 import java.io.File;
@@ -12,7 +13,7 @@ public class FileNode extends TreeItem<Node<?>> implements Node<ExcelInputFile> 
     public FileNode(File file) throws Exception {
         super();
         data = new ExcelInputFile();
-        data.open(file);
+        data.analyze(file);
         setValue(this);
     }
 
@@ -23,7 +24,7 @@ public class FileNode extends TreeItem<Node<?>> implements Node<ExcelInputFile> 
 
     @Override
     public ContextMenu getContextMenu() {
-        return null;
+        return new ContextMenu(ContextMenuFactory.getInstance().createDeleteMenuItem(this));
     }
 
     @Override

@@ -3,6 +3,7 @@ package ru.romzhel.app.nodes;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TreeItem;
 import ru.romzhel.app.entities.DescriptionTemplate;
+import ru.romzhel.app.utils.ContextMenuFactory;
 
 public class TemplateNode extends TreeItem<Node<?>> implements Node<DescriptionTemplate> {
     private DescriptionTemplate descriptionTemplate;
@@ -20,7 +21,8 @@ public class TemplateNode extends TreeItem<Node<?>> implements Node<DescriptionT
 
     @Override
     public ContextMenu getContextMenu() {
-        return null;
+        return new ContextMenu(ContextMenuFactory.getInstance().createDeleteMenuItem(this),
+                ContextMenuFactory.getInstance().createGenerateSingleTemplateResultMenuItem(this));
     }
 
     @Override
