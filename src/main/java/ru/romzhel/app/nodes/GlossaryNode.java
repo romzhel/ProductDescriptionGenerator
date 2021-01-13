@@ -43,4 +43,9 @@ public class GlossaryNode extends TreeItem<Node<?>> implements Node<StringGlossa
     public String getWorkPanePath() {
         return "/fxml/glossary_editor.fxml";
     }
+
+    @Override
+    public String getStyle() {
+        return null;
+    }
 }

@@ -14,4 +14,6 @@ public interface Node<T> {
     String toString();
 
     String getWorkPanePath();
+
+    String getStyle();
 }

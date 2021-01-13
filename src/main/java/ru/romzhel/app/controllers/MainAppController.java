@@ -83,14 +83,13 @@ public class MainAppController implements Initializable {
                         if (item != null) {
                             setText(item.toString());
                             setContextMenu(item.getContextMenu());
+                            setStyle(item.getStyle());
                         } else {
                             setText(null);
                             setContextMenu(null);
                         }
                     }
                 };
-
-                String.format("%s dfdfd %s dfdfdfd %s", new String[]{"", "", ""});
 
                 source.setOnDragDetected(event -> {
                     Dragboard dragboard = source.startDragAndDrop(TransferMode.LINK);

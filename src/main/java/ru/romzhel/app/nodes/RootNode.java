@@ -40,5 +40,10 @@ public class RootNode extends TreeItem<Node<?>> implements Node<String> {
         return null;
     }
 
+    @Override
+    public String getStyle() {
+        return null;
+    }
+
 
 }

@@ -41,4 +41,9 @@ public class PropertyNode extends TreeItem<Node<?>> implements Node<String> {
     public String getWorkPanePath() {
         return null;
     }
+
+    @Override
+    public String getStyle() {
+        return "-fx-font-style: italic";
+    }
 }

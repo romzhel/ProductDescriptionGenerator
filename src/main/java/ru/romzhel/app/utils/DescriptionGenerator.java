@@ -17,6 +17,7 @@ import java.util.List;
 
 public class DescriptionGenerator {
     public static final Logger logger = LogManager.getLogger(DescriptionGenerator.class);
+    public static final String EMPTY = "#EMPTY#";
 
     public void generate(TemplateNode templateNode) throws Exception {
         List<String> values = new ArrayList<>();
@@ -54,10 +55,11 @@ public class DescriptionGenerator {
                 if (inputRow.getCell(colIndex) != null) {
                     values.add(inputRow.getCell(colIndex).toString());
                 } else {
-                    values.add("!EMPTY!");
+                    values.add(EMPTY);
                 }
             }
             String description = StringUtils.capitalize(String.format(parsedContent.get(0), values.toArray()));
+            description = new TemplateContentCorrector().emptyCorrector(description);
             outputRow = excelOutputFile.sheet.createRow(outputRowIndex++);
             Cell cell = outputRow.createCell(0, CellType.STRING);
             cell.setCellValue(inputRow.getCell(excelInputFile.getTitles().get("Артикул")).toString());

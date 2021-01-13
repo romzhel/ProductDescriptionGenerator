@@ -40,5 +40,10 @@ public class FileRootNode extends TreeItem<Node<?>> implements Node<String> {
         return null;
     }
 
+    @Override
+    public String getStyle() {
+        return "-fx-text-fill: black; -fx-font-weight: bold;";
+    }
+
 
 }

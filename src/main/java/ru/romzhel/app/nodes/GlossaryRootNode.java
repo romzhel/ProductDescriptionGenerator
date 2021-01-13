@@ -39,4 +39,9 @@ public class GlossaryRootNode extends TreeItem<Node<?>> implements Node<String> 
     public String getWorkPanePath() {
         return "/fxml/glossary_editor.fxml";
     }
+
+    @Override
+    public String getStyle() {
+        return "-fx-text-fill: black; -fx-font-weight: bold;";
+    }
 }
