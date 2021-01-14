@@ -5,10 +5,12 @@ import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
+import ru.romzhel.app.entities.Property;
 import ru.romzhel.app.entities.StringGlossary;
 import ru.romzhel.app.nodes.TemplateNode;
 import ru.romzhel.app.services.ExcelFileService;
 import ru.romzhel.app.services.GlossaryService;
+import ru.romzhel.app.services.PropertyService;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -21,7 +23,8 @@ public class DescriptionGenerator {
     public void generate(TemplateNode templateNode) throws Exception {
         ExcelInputFile excelInputFile = (ExcelInputFile) ExcelFileService.getInstance().getFileMap().get(templateNode.getData().getLinkedFileName());
 
-        if (getArticleColIndex(excelInputFile) < 0) {
+        int articleColumnIndex = PropertyService.getInstance().getArticleColumnIndex(excelInputFile);
+        if (articleColumnIndex < 0) {
             throw new RuntimeException("Не найден столбец-идентификатор с Артикулом");
         }
 
@@ -48,12 +51,14 @@ public class DescriptionGenerator {
                     continue;
                 }
 
-                int colIndex = excelInputFile.getTitles().getOrDefault(treatedVariable, -1);
-                if (colIndex < 0) {
+                Property property = excelInputFile.getPropertyMap().get(treatedVariable);
+                if (property == null) {
                     logger.warn("Неизвестная переменная: '{}'", treatedVariable);
                     values.add("?" + treatedVariable + "?");
                     continue;
                 }
+
+                int colIndex = property.getColumnIndex();
 
                 if (inputRow.getCell(colIndex) != null && !inputRow.getCell(colIndex).toString().isEmpty()) {
                     values.add(inputRow.getCell(colIndex).toString());
@@ -65,7 +70,7 @@ public class DescriptionGenerator {
             description = new TemplateContentCorrector().correct(description);
             outputRow = excelOutputFile.sheet.createRow(outputRowIndex++);
             Cell cell = outputRow.createCell(0, CellType.STRING);
-            cell.setCellValue(inputRow.getCell(getArticleColIndex(excelInputFile)).toString());
+            cell.setCellValue(inputRow.getCell(articleColumnIndex).toString());
             cell = outputRow.createCell(1, CellType.STRING);
             cell.setCellValue(description);
         }
@@ -78,11 +83,5 @@ public class DescriptionGenerator {
         } catch (Exception e) {
             logger.warn("Ошибка сохранения: {}", e.getMessage());
         }
-
-    }
-
-    private int getArticleColIndex(ExcelInputFile excelInputFile) {
-        return excelInputFile.getTitles().getOrDefault("Артикул [ARTICLE]",
-                excelInputFile.getTitles().getOrDefault("Артикул", -1));
     }
 }

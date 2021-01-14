@@ -2,39 +2,43 @@ package ru.romzhel.app.nodes;
 
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TreeItem;
+import ru.romzhel.app.entities.Property;
+import ru.romzhel.app.utils.ContextMenuFactory;
 
-public class PropertyNode extends TreeItem<Node<?>> implements Node<String> {
-    private String data;
+import static ru.romzhel.app.enums.PropertyFilling.FULL;
 
-    public PropertyNode(String propertyName) throws Exception {
+public class PropertyNode extends TreeItem<Node<?>> implements Node<Property> {
+    private Property data;
+
+    public PropertyNode(Property property) throws Exception {
         super();
-        data = propertyName;
+        data = property;
         setValue(this);
     }
 
     @Override
     public String getName() {
-        return "Файлы";
+        return data.getName();
     }
 
     @Override
     public ContextMenu getContextMenu() {
-        return null;
+        return new ContextMenu(ContextMenuFactory.getInstance().createDeleteMenuItem(this));
     }
 
     @Override
-    public String getData() {
+    public Property getData() {
         return data;
     }
 
     @Override
-    public void setData(String data) {
+    public void setData(Property data) {
         this.data = data;
     }
 
     @Override
     public String toString() {
-        return data;
+        return data.getName();
     }
 
     @Override
@@ -44,6 +48,10 @@ public class PropertyNode extends TreeItem<Node<?>> implements Node<String> {
 
     @Override
     public String getStyle() {
-        return "-fx-text-fill: saddleBrown; -fx-font-style: italic";
+        return new StringBuilder()
+                .append("-fx-text-fill: ")
+                .append(data.getFilling() == FULL ? "saddleBrown;" : "salmon;")
+                .append("-fx-font-style: italic")
+                .toString();
     }
 }

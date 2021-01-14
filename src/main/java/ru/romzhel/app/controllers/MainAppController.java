@@ -16,8 +16,10 @@ import javafx.util.Callback;
 import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.romzhel.app.entities.Property;
 import ru.romzhel.app.nodes.*;
 import ru.romzhel.app.services.ExcelFileService;
+import ru.romzhel.app.services.PropertyService;
 import ru.romzhel.app.utils.Dialogs;
 import ru.romzhel.app.utils.XMLUtilities;
 
@@ -51,6 +53,7 @@ public class MainAppController implements Initializable {
             XMLUtilities.loadAll(this);
         } catch (Exception e) {
             logger.error("Ошибка загрузки сохраненных данных: {}", e.getMessage(), e);
+            Dialogs.showMessage("Ошибка загрузки данных рабочей среды", e.getMessage());
         }
 
         tvNavi.setOnMouseClicked(event -> {
@@ -116,8 +119,8 @@ public class MainAppController implements Initializable {
 
             for (int f = 0; f < files.size(); f++) {
                 FileNode fileNode = new FileNode(files.get(f));
-                for (int i = 0; i < fileNode.getData().getTitlesIndexes().size(); i++) {
-                    fileNode.getChildren().add(new PropertyNode(fileNode.getData().getTitlesIndexes().get(i)));
+                for (Property property : PropertyService.getInstance().getPropertiesByOrder(fileNode.getData())) {
+                    fileNode.getChildren().add(new PropertyNode(property));
                 }
                 fileRootNode.getChildren().add(fileNode);
                 ExcelFileService.getInstance().getFileMap().put(fileNode.getData().getFileName(), fileNode.getData());
@@ -129,6 +132,7 @@ public class MainAppController implements Initializable {
     }
 
     public void saveToFile() throws JAXBException {
+        logger.trace("сохранение рабочей среды в xml файлы");
         XMLUtilities.saveAll(this);
     }
 }

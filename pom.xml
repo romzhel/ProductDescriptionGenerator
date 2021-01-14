@@ -6,7 +6,7 @@
 
     <groupId>ru.romzhel</groupId>
     <artifactId>ProductDescriptionGenerator</artifactId>
-    <version>0.3.1</version>
+    <version>0.3.2.1</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

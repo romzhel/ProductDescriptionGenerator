@@ -15,6 +15,7 @@ import ru.romzhel.app.entities.DescriptionTemplate;
 import ru.romzhel.app.entities.StringGlossary;
 import ru.romzhel.app.services.ExcelFileService;
 import ru.romzhel.app.services.GlossaryService;
+import ru.romzhel.app.services.PropertyService;
 
 import java.time.Duration;
 import java.util.Collection;
@@ -102,7 +103,7 @@ public class TemplateContentEditor extends CodeArea {
 
             String fileName = template.getLinkedFileName();
             ExcelInputFile excelInputFile = (ExcelInputFile) ExcelFileService.getInstance().getFileMap().get(fileName);
-            int colIndex = excelInputFile != null ? excelInputFile.getTitles().getOrDefault(variableText, -1) : -1;
+            int colIndex = excelInputFile != null ? PropertyService.getInstance().getPropertyColumnIndex(excelInputFile, variableText) : -1;
 
             String styleClass = glossary != null ? "glossary" : colIndex >= 0 ? "property" : "error";
             assert styleClass != null;
