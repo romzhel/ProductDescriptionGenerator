@@ -14,6 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import lombok.Data;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.romzhel.app.nodes.*;
 import ru.romzhel.app.services.ExcelFileService;
 import ru.romzhel.app.utils.Dialogs;
@@ -28,6 +30,7 @@ import java.util.ResourceBundle;
 
 @Data
 public class MainAppController implements Initializable {
+    public static final Logger logger = LogManager.getLogger();
     public final TemplateRootNode templateRootNode = new TemplateRootNode();
     public final GlossaryRootNode glossaryRootNode = new GlossaryRootNode();
     public final FileRootNode fileRootNode = new FileRootNode();
@@ -47,7 +50,7 @@ public class MainAppController implements Initializable {
         try {
             XMLUtilities.loadAll(this);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Ошибка загрузки сохраненных данных: {}", e.getMessage(), e);
         }
 
         tvNavi.setOnMouseClicked(event -> {

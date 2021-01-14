@@ -1,6 +1,5 @@
 package ru.romzhel.app.utils;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
@@ -20,12 +19,16 @@ public class DescriptionGenerator {
     public static final String EMPTY = "#EMPTY#";
 
     public void generate(TemplateNode templateNode) throws Exception {
-        List<String> values = new ArrayList<>();
-        List<String> parsedContent = new TemplateContentParser().parseContent(templateNode.getData().getContent());
-
         ExcelInputFile excelInputFile = (ExcelInputFile) ExcelFileService.getInstance().getFileMap().get(templateNode.getData().getLinkedFileName());
-        excelInputFile.open();
 
+        if (getArticleColIndex(excelInputFile) < 0) {
+            throw new RuntimeException("Не найден столбец-идентификатор с Артикулом");
+        }
+
+        List<String> parsedContent = new TemplateContentParser().parseContent(templateNode.getData().getContent());
+        List<String> values = new ArrayList<>();
+
+        excelInputFile.open();
         ExcelFile excelOutputFile = new ExcelFile();
         excelOutputFile.create();
 
@@ -52,25 +55,34 @@ public class DescriptionGenerator {
                     continue;
                 }
 
-                if (inputRow.getCell(colIndex) != null) {
+                if (inputRow.getCell(colIndex) != null && !inputRow.getCell(colIndex).toString().isEmpty()) {
                     values.add(inputRow.getCell(colIndex).toString());
                 } else {
                     values.add(EMPTY);
                 }
             }
-            String description = StringUtils.capitalize(String.format(parsedContent.get(0), values.toArray()));
-            description = new TemplateContentCorrector().emptyCorrector(description);
+            String description = String.format(parsedContent.get(0), values.toArray());
+            description = new TemplateContentCorrector().correct(description);
             outputRow = excelOutputFile.sheet.createRow(outputRowIndex++);
             Cell cell = outputRow.createCell(0, CellType.STRING);
-            cell.setCellValue(inputRow.getCell(excelInputFile.getTitles().get("Артикул")).toString());
+            cell.setCellValue(inputRow.getCell(getArticleColIndex(excelInputFile)).toString());
             cell = outputRow.createCell(1, CellType.STRING);
             cell.setCellValue(description);
         }
 
         excelInputFile.close();
-        excelOutputFile.save(new Dialogs().selectAnyFile(null, "Сохранение результата",
-                Dialogs.EXCEL_FILES, "descriptions.xlsx").get(0));
-        Desktop.getDesktop().open(excelOutputFile.file);
+        try {
+            excelOutputFile.save(new Dialogs().selectAnyFile(null, "Сохранение результата",
+                    Dialogs.EXCEL_FILES, "descriptions.xlsx").get(0));
+            Desktop.getDesktop().open(excelOutputFile.file);
+        } catch (Exception e) {
+            logger.warn("Ошибка сохранения: {}", e.getMessage());
+        }
 
+    }
+
+    private int getArticleColIndex(ExcelInputFile excelInputFile) {
+        return excelInputFile.getTitles().getOrDefault("Артикул [ARTICLE]",
+                excelInputFile.getTitles().getOrDefault("Артикул", -1));
     }
 }

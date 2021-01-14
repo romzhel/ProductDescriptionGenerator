@@ -44,6 +44,6 @@ public class PropertyNode extends TreeItem<Node<?>> implements Node<String> {
 
     @Override
     public String getStyle() {
-        return "-fx-font-style: italic";
+        return "-fx-text-fill: saddleBrown; -fx-font-style: italic";
     }
 }

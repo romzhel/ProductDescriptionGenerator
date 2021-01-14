@@ -42,7 +42,7 @@ public class FileRootNode extends TreeItem<Node<?>> implements Node<String> {
 
     @Override
     public String getStyle() {
-        return "-fx-text-fill: black; -fx-font-weight: bold;";
+        return "-fx-text-fill: saddleBrown; -fx-font-weight: bold;";
     }
 
 

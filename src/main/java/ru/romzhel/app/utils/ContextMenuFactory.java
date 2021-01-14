@@ -2,6 +2,8 @@ package ru.romzhel.app.utils;
 
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeItem;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.romzhel.app.nodes.FileNode;
 import ru.romzhel.app.nodes.GlossaryNode;
 import ru.romzhel.app.nodes.TemplateNode;
@@ -10,6 +12,7 @@ import ru.romzhel.app.services.GlossaryService;
 import ru.romzhel.app.services.TemplateService;
 
 public class ContextMenuFactory {
+    public static final Logger logger = LogManager.getLogger(ContextMenuFactory.class);
     private static ContextMenuFactory instance;
 
     private ContextMenuFactory() {
@@ -49,7 +52,8 @@ public class ContextMenuFactory {
             try {
                 new DescriptionGenerator().generate(((TemplateNode) treeItem));
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error("Ошибка генерации описаний: {}", e.getMessage(), e);
+                Dialogs.showMessage("Ошибка генерации описаний", e.getMessage());
             }
         });
         return menuItem;

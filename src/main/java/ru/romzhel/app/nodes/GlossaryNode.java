@@ -46,6 +46,6 @@ public class GlossaryNode extends TreeItem<Node<?>> implements Node<StringGlossa
 
     @Override
     public String getStyle() {
-        return null;
+        return "-fx-text-fill: mediumBlue;";
     }
 }

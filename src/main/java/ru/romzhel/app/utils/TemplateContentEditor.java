@@ -96,15 +96,15 @@ public class TemplateContentEditor extends CodeArea {
         Matcher matcher = PATTERN.matcher(text);
         int lastKwEnd = 0;
         StyleSpansBuilder<Collection<String>> spansBuilder = new StyleSpansBuilder<>();
-        logger.trace("finding matching...");
         while (matcher.find()) {
             String variableText = matcher.group(1);
             StringGlossary glossary = GlossaryService.getInstance().getGlossaryMap().get(variableText);
+
             String fileName = template.getLinkedFileName();
             ExcelInputFile excelInputFile = (ExcelInputFile) ExcelFileService.getInstance().getFileMap().get(fileName);
             int colIndex = excelInputFile != null ? excelInputFile.getTitles().getOrDefault(variableText, -1) : -1;
 
-            String styleClass = glossary != null || colIndex >= 0 ? "brace" : "brace-error";
+            String styleClass = glossary != null ? "glossary" : colIndex >= 0 ? "property" : "error";
             assert styleClass != null;
             spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
             spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());

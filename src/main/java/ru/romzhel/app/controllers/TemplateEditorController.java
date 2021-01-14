@@ -84,6 +84,7 @@ public class TemplateEditorController implements Initializable, NodeController<M
             tfTemplateName.setText(descriptionTemplate.getName());
             tfTemplateLink.setText(descriptionTemplate.getLinkedFileName());
             contentEditor.linkTemplate(descriptionTemplate);
+            logger.debug("link ContentEditor with: {}", descriptionTemplate.getName());
             contentEditor.replaceText(descriptionTemplate.getContent());
         }
 

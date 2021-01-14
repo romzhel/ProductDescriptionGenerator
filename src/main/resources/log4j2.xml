@@ -5,7 +5,7 @@
     </Properties>
 
     <Appenders>
-        <File name="FILE" fileName="${basePath}/app.log" append="true">
+        <File name="FILE" fileName="${basePath}/app.log" append="false">
             <PatternLayout pattern="%d{yyyy-dd-MM HH:mm:ss.SSS} [%-25t] %-5level %logger{36} - %msg%n"/>
         </File>
 

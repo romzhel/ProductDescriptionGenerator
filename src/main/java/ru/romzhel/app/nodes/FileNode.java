@@ -49,6 +49,6 @@ public class FileNode extends TreeItem<Node<?>> implements Node<ExcelInputFile> 
 
     @Override
     public String getStyle() {
-        return "-fx-text-fill: black;";
+        return "-fx-text-fill: saddleBrown;";
     }
 }

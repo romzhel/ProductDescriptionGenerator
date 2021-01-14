@@ -6,7 +6,7 @@
 
     <groupId>ru.romzhel</groupId>
     <artifactId>ProductDescriptionGenerator</artifactId>
-    <version>0.3</version>
+    <version>0.3.1</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -66,7 +66,11 @@
                         log4j-core,
                         log4j-api,
                         commons-lang3,
-                        richtextfx
+                        richtextfx,
+                        flowless,
+                        reactfx,
+                        undofx,
+                        wellbehavedfx
                     </includeArtifactIds>
                     <overWriteReleases>false</overWriteReleases>
                     <overWriteSnapshots>false</overWriteSnapshots>

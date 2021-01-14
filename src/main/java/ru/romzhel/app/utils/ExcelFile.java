@@ -30,8 +30,9 @@ public class ExcelFile {
     }
 
     public void open() throws Exception {
-        logger.trace("книга '{}' открыта", file);
+        logger.trace("Пытаемся открыть файл: '{}'", file);
         workbook = WorkbookFactory.create(file);
+        logger.trace("книга '{}' открыта", file);
         sheet = workbook.getSheetAt(0);
     }
 
@@ -42,19 +43,20 @@ public class ExcelFile {
 
     public void save(File file) {
         if (file == null) {
-            throw new RuntimeException("При сохранении не выбрано имя файла");
+            throw new RuntimeException("Не выбран файл для сохранения");
         }
 
         this.file = file;
 
-        try {
-            FileOutputStream outFile = new FileOutputStream(file);
+        try (FileOutputStream outFile = new FileOutputStream(file)) {
             workbook.write(outFile);
-
-            workbook.close();
-            outFile.close();
         } catch (Exception e) {
-            Dialogs.showMessage("Ошибка создания файла", e.getMessage());
+            Dialogs.showMessage("Ошибка создания/записи в файл", e.getMessage());
+        } finally {
+            try {
+                workbook.close();
+            } catch (IOException e) {
+            }
         }
     }
 

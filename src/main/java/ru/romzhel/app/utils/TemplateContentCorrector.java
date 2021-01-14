@@ -1,5 +1,7 @@
 package ru.romzhel.app.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -7,22 +9,25 @@ import static ru.romzhel.app.utils.DescriptionGenerator.EMPTY;
 
 public class TemplateContentCorrector {
 
-    public String emptyCorrector(String text) {
-        //1. проверяем наличие в тексте !EMPTY!
-        if (!text.contains(EMPTY)) {
-            return text;
+    public String correct(String text) {
+        StringBuilder resultBuilder = new StringBuilder();                                          //1. бьём по абзацам
+        for (String para : text.split("\n")) {
+            StringBuilder sb = new StringBuilder();                       //2. бьём по предложениям и находим проблемные
+//        [^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)
+            Matcher matcher = Pattern.compile("[^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)",
+                    Pattern.MULTILINE | Pattern.COMMENTS).matcher(para);
+
+            while (matcher.find()) {
+                String found = matcher.group();
+                String treated = StringUtils.capitalize(matcher.group().contains(EMPTY) ?
+                        correctSentence(matcher.group()) : matcher.group());
+                sb.append(treated);
+            }
+
+            resultBuilder.append(resultBuilder.toString().isEmpty() ? sb : "\n" + sb);
         }
 
-        //2. бьём по предложениям и находим проблемные
-        StringBuilder sb = new StringBuilder();
-//        Matcher matcher = Pattern.compile("[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)", Pattern.MULTILINE | Pattern.COMMENTS).matcher(text);
-        Matcher matcher = Pattern.compile("[^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)", Pattern.MULTILINE | Pattern.COMMENTS).matcher(text);
-
-        while (matcher.find()) {
-            sb.append(matcher.group().contains(EMPTY) ? correctSentence(matcher.group()) : matcher.group());
-        }
-
-        return sb.toString();
+        return resultBuilder.toString();
     }
 
     public String correctSentence(String sentence) {
