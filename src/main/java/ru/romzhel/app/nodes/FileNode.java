@@ -32,7 +32,7 @@ public class FileNode extends TreeItem<Node<?>> implements Node<ExcelInputFile> 
 
     @Override
     public String getName() {
-        return "Файлы";
+        return data.getFileName();
     }
 
     @Override

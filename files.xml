@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<files>
+    <fileMap>
+        <entry>
+            <key>DAC.xlsx</key>
+            <value>
+                <file>C:\Users\Ray\Downloads\DAC.xlsx</file>
+                <propertyMap>
+                    <entry>
+                        <key>Артикул [ARTICLE]</key>
+                        <value>
+                            <columnIndex>0</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Артикул [ARTICLE]</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Категория</key>
+                        <value>
+                            <columnIndex>3</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Категория</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Усилие привода, Н*м [dac_torque_moment]</key>
+                        <value>
+                            <columnIndex>6</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Усилие привода, Н*м [dac_torque_moment]</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Тип пожарного привода</key>
+                        <value>
+                            <columnIndex>21</columnIndex>
+                            <filling>PARTIAL</filling>
+                            <name>Тип пожарного привода</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Вес, кг. [WEIGHT]</key>
+                        <value>
+                            <columnIndex>13</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Вес, кг. [WEIGHT]</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Страна происхождения (название)</key>
+                        <value>
+                            <columnIndex>14</columnIndex>
+                            <filling>PARTIAL</filling>
+                            <name>Страна происхождения (название)</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Размер квадратного штока (сторона)</key>
+                        <value>
+                            <columnIndex>23</columnIndex>
+                            <filling>PARTIAL</filling>
+                            <name>Размер квадратного штока (сторона)</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Площадь заслонки, кв.м. [dac_space]</key>
+                        <value>
+                            <columnIndex>7</columnIndex>
+                            <filling>PARTIAL</filling>
+                            <name>Площадь заслонки, кв.м. [dac_space]</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Возвратная пружина [dac_spring]</key>
+                        <value>
+                            <columnIndex>5</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Возвратная пружина [dac_spring]</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Напряжение питания [voltage]</key>
+                        <value>
+                            <columnIndex>8</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Напряжение питания [voltage]</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Код группы (GBK) [GBK]</key>
+                        <value>
+                            <columnIndex>12</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Код группы (GBK) [GBK]</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Время закрытия</key>
+                        <value>
+                            <columnIndex>18</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Время закрытия</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Время позиционирования</key>
+                        <value>
+                            <columnIndex>16</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Время позиционирования</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Наличие концевых выключателей [dac_switches]</key>
+                        <value>
+                            <columnIndex>10</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Наличие концевых выключателей [dac_switches]</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Тип привода</key>
+                        <value>
+                            <columnIndex>25</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Тип привода</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Настраиваемый сдвиг/диапазон</key>
+                        <value>
+                            <columnIndex>28</columnIndex>
+                            <filling>PARTIAL</filling>
+                            <name>Настраиваемый сдвиг/диапазон</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Время открытия</key>
+                        <value>
+                            <columnIndex>17</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Время открытия</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Изображение</key>
+                        <value>
+                            <columnIndex>1</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Изображение</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Класс IP</key>
+                        <value>
+                            <columnIndex>15</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Класс IP</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Заказной номер [NUMBER]</key>
+                        <value>
+                            <columnIndex>2</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Заказной номер [NUMBER]</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Картинки</key>
+                        <value>
+                            <columnIndex>29</columnIndex>
+                            <filling>PARTIAL</filling>
+                            <name>Картинки</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Анонс</key>
+                        <value>
+                            <columnIndex>20</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Анонс</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Наличе термо-размыкающего устройства (ТРУ)</key>
+                        <value>
+                            <columnIndex>22</columnIndex>
+                            <filling>PARTIAL</filling>
+                            <name>Наличе термо-размыкающего устройства (ТРУ)</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Встроенный потенциометр</key>
+                        <value>
+                            <columnIndex>26</columnIndex>
+                            <filling>PARTIAL</filling>
+                            <name>Встроенный потенциометр</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Диаметр круглого штока</key>
+                        <value>
+                            <columnIndex>24</columnIndex>
+                            <filling>PARTIAL</filling>
+                            <name>Диаметр круглого штока</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Управляющий сигнал [dac_management_signal]</key>
+                        <value>
+                            <columnIndex>9</columnIndex>
+                            <filling>PARTIAL</filling>
+                            <name>Управляющий сигнал [dac_management_signal]</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Длина кабеля</key>
+                        <value>
+                            <columnIndex>19</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Длина кабеля</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Обратная связь</key>
+                        <value>
+                            <columnIndex>27</columnIndex>
+                            <filling>PARTIAL</filling>
+                            <name>Обратная связь</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Наименование элемента</key>
+                        <value>
+                            <columnIndex>4</columnIndex>
+                            <filling>FULL</filling>
+                            <name>Наименование элемента</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Поддерживаемые протоколы коммуникации [dac_communication]</key>
+                        <value>
+                            <columnIndex>11</columnIndex>
+                            <filling>PARTIAL</filling>
+                            <name>Поддерживаемые протоколы коммуникации [dac_communication]</name>
+                            <order>0</order>
+                        </value>
+                    </entry>
+                </propertyMap>
+            </value>
+        </entry>
+    </fileMap>
+</files>

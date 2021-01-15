@@ -3,7 +3,6 @@ package ru.romzhel.app.utils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import ru.romzhel.app.entities.Property;
 import ru.romzhel.app.entities.StringGlossary;
@@ -17,9 +16,16 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.apache.poi.ss.usermodel.CellType.STRING;
+
 public class DescriptionGenerator {
     public static final Logger logger = LogManager.getLogger(DescriptionGenerator.class);
     public static final String EMPTY = "#EMPTY#";
+    private TemplateContentCorrector templateContentCorrector;
+
+    public DescriptionGenerator() {
+        templateContentCorrector = new TemplateContentCorrector();
+    }
 
     public void generate(TemplateNode templateNode) throws Exception {
         ExcelInputFile excelInputFile = (ExcelInputFile) ExcelFileService.getInstance().getFileMap().get(templateNode.getData().getLinkedFileName());
@@ -62,17 +68,17 @@ public class DescriptionGenerator {
                 int colIndex = property.getColumnIndex();
 
                 if (inputRow.getCell(colIndex) != null && !inputRow.getCell(colIndex).toString().isEmpty()) {
-                    values.add(inputRow.getCell(colIndex).toString());
+                    values.add(templateContentCorrector.correctStringProperty(inputRow.getCell(colIndex).toString()));
                 } else {
                     values.add(EMPTY);
                 }
             }
             String description = String.format(parsedContent.get(0), values.toArray());
-            description = new TemplateContentCorrector().correct(description);
+            description = templateContentCorrector.correctDescription(description);
             outputRow = excelOutputFile.sheet.createRow(outputRowIndex++);
-            Cell cell = outputRow.createCell(0, CellType.STRING);
+            Cell cell = outputRow.createCell(0, STRING);
             cell.setCellValue(inputRow.getCell(articleColumnIndex).toString());
-            cell = outputRow.createCell(1, CellType.STRING);
+            cell = outputRow.createCell(1, STRING);
             cell.setCellValue(description);
         }
 

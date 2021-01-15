@@ -12,6 +12,7 @@ import ru.romzhel.app.services.ExcelFileService;
 import ru.romzhel.app.services.GlossaryService;
 import ru.romzhel.app.services.PropertyService;
 import ru.romzhel.app.services.TemplateService;
+import ru.romzhel.app.ui_components.Dialogs;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -94,7 +95,8 @@ public class XMLUtilities {
 
                     mainAppController.getNavigationTree().getFileRootNode().getChildren().add(fileNode);
                 } catch (Exception e) {
-                    logger.error("Ошибка парсинга столбцов: '{}'", e.getMessage(), e);
+                    logger.error("Ошибка парсинга столбцов при работе с файлом: '{}'", e.getMessage(), e);
+                    Dialogs.showMessage("Ошибка парсинга столбцов при работе с файлом", e.getMessage());
                 }
             });
             ExcelFileService.getInstance().setFileMap(excelFileService.getFileMap());

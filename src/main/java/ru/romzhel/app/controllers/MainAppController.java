@@ -81,12 +81,17 @@ public class MainAppController implements Initializable {
             List<File> files = new Dialogs().selectAnyFile(stage, "Выбор файла", Dialogs.EXCEL_FILES, null);
 
             for (int f = 0; f < files.size(); f++) {
-                FileNode fileNode = new FileNode(files.get(f));
-                for (Property property : PropertyService.getInstance().getPropertiesByOrder(fileNode.getData())) {
-                    fileNode.getChildren().add(new PropertyNode(property));
+                try {
+                    FileNode fileNode = new FileNode(files.get(f));
+                    for (Property property : PropertyService.getInstance().getPropertiesByOrder(fileNode.getData())) {
+                        fileNode.getChildren().add(new PropertyNode(property));
+                    }
+                    navigationTree.getFileRootNode().getChildren().add(fileNode);
+                    ExcelFileService.getInstance().getFileMap().put(fileNode.getData().getFileName(), fileNode.getData());
+                } catch (Exception e) {
+                    logger.error("Ошибка открытия файла: '{}");
+                    Dialogs.showMessage("Ошибка открытия файла", e.getMessage());
                 }
-                navigationTree.getFileRootNode().getChildren().add(fileNode);
-                ExcelFileService.getInstance().getFileMap().put(fileNode.getData().getFileName(), fileNode.getData());
             }
 
         } catch (Exception e) {

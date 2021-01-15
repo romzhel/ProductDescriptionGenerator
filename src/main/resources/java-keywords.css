@@ -3,8 +3,13 @@
     -fx-font-weight: bold;
 }
 
-.property {
+.property-full {
     -fx-fill: saddleBrown;
+    -fx-font-weight: bold;
+}
+
+.property-partial {
+    -fx-fill: salmon;
     -fx-font-weight: bold;
 }
 

@@ -75,7 +75,7 @@ public class NavigationTree extends TreeView<Node<?>> {
                     }
 
                     TreeItem thisItem = source.getTreeItem();
-                    if (draggedItem == null || thisItem == null || draggedItem == thisItem) {
+                    if (draggedItem == null || !(thisItem instanceof PropertyNode) || draggedItem == thisItem) {
                         return;
                     }
 
@@ -115,7 +115,9 @@ public class NavigationTree extends TreeView<Node<?>> {
 
                 source.setOnDragDone((DragEvent event) -> {
                     clearDropLocation();
-                    PropertyService.getInstance().reorderProperties((FileNode) source.getTreeItem().getParent());
+                    if (source.getTreeItem() instanceof PropertyNode) {
+                        PropertyService.getInstance().reorderProperties((FileNode) source.getTreeItem().getParent());
+                    }
                 });
 
                 return source;
