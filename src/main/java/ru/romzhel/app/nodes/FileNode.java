@@ -3,7 +3,7 @@ package ru.romzhel.app.nodes;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TreeItem;
 import ru.romzhel.app.services.PropertyService;
-import ru.romzhel.app.utils.ContextMenuFactory;
+import ru.romzhel.app.ui_components.ContextMenuFactory;
 import ru.romzhel.app.utils.ExcelInputFile;
 
 import java.io.File;

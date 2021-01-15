@@ -1,20 +1,55 @@
 .glossary {
     -fx-fill: mediumBlue;
     -fx-font-weight: bold;
-    -fx-background-color: #f2f9fc;
 }
 
 .property {
     -fx-fill: saddleBrown;
     -fx-font-weight: bold;
-    -fx-background-color: #f2f9fc;
 }
 
 .error {
     -fx-fill: red;
     -fx-font-weight: bold;
-    -fx-background-color: #f2f9fc;
 }
+
+/*.node-root-template {
+    -fx-font-weight: bold;
+}
+
+.node-template {
+
+}*/
+
+.node-root-glossary {
+    -fx-text-fill: mediumBlue;
+    -fx-font-weight: bold;
+}
+
+.node-glossary {
+    -fx-text-fill: mediumBlue;
+    -fx-font-weight: normal;
+}
+
+/*.node-root-file {
+    -fx-text-fill: saddleBrown;
+    -fx-font-weight: bold;
+}
+
+.node-file {
+    -fx-text-fill: saddleBrown;
+    -fx-font-weight: normal;
+}
+
+.node-property-full {
+    -fx-text-fill: saddleBrown;
+    -fx-font-style: italic
+}
+
+.node-property-partial {
+    -fx-text-fill: salmon;
+    -fx-font-style: italic
+}*/
 
 .rtx-content {
     -fx-padding: 0.5em;

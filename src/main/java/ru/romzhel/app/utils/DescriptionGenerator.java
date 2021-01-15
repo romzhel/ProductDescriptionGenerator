@@ -11,6 +11,7 @@ import ru.romzhel.app.nodes.TemplateNode;
 import ru.romzhel.app.services.ExcelFileService;
 import ru.romzhel.app.services.GlossaryService;
 import ru.romzhel.app.services.PropertyService;
+import ru.romzhel.app.ui_components.Dialogs;
 
 import java.awt.*;
 import java.util.ArrayList;

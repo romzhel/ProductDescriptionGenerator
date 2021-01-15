@@ -66,7 +66,7 @@ public class XMLUtilities {
         TemplateService templateService = (TemplateService) XMLUtilities.loadFromXml(TemplateService.class, TEMPLATE_FILE);
         if (templateService != null) {
             templateService.getTemplateMap().entrySet().forEach(descriptionTemplateEntry ->
-                    mainAppController.templateRootNode.getChildren().add(new TemplateNode(descriptionTemplateEntry.getValue())));
+                    mainAppController.getNavigationTree().getTemplateRootNode().getChildren().add(new TemplateNode(descriptionTemplateEntry.getValue())));
             TemplateService.getInstance().setTemplateMap(templateService.getTemplateMap());
             logger.trace("шаблоны загружены");
         }
@@ -76,7 +76,7 @@ public class XMLUtilities {
         GlossaryService glossaryService = (GlossaryService) XMLUtilities.loadFromXml(GlossaryService.class, GLOSSARY_FILE);
         if (glossaryService != null) {
             glossaryService.getGlossaryMap().entrySet().forEach(glossaryEntry ->
-                    mainAppController.glossaryRootNode.getChildren().add(new GlossaryNode(glossaryEntry.getValue())));
+                    mainAppController.getNavigationTree().getGlossaryRootNode().getChildren().add(new GlossaryNode(glossaryEntry.getValue())));
             GlossaryService.getInstance().setGlossaryMap(glossaryService.getGlossaryMap());
             logger.trace("словари загружены");
         }
@@ -92,7 +92,7 @@ public class XMLUtilities {
                         fileNode.getChildren().add(new PropertyNode(property));
                     }
 
-                    mainAppController.fileRootNode.getChildren().add(fileNode);
+                    mainAppController.getNavigationTree().getFileRootNode().getChildren().add(fileNode);
                 } catch (Exception e) {
                     logger.error("Ошибка парсинга столбцов: '{}'", e.getMessage(), e);
                 }

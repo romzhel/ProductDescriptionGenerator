@@ -3,7 +3,7 @@ package ru.romzhel.app.nodes;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TreeItem;
 import ru.romzhel.app.entities.Property;
-import ru.romzhel.app.utils.ContextMenuFactory;
+import ru.romzhel.app.ui_components.ContextMenuFactory;
 
 import static ru.romzhel.app.enums.PropertyFilling.FULL;
 
@@ -51,7 +51,7 @@ public class PropertyNode extends TreeItem<Node<?>> implements Node<Property> {
         return new StringBuilder()
                 .append("-fx-text-fill: ")
                 .append(data.getFilling() == FULL ? "saddleBrown;" : "salmon;")
-                .append("-fx-font-style: italic")
+                .append("-fx-font-style: italic;")
                 .toString();
     }
 }

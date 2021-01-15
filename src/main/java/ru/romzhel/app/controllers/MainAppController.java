@@ -5,22 +5,20 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.romzhel.app.entities.Property;
-import ru.romzhel.app.nodes.*;
+import ru.romzhel.app.nodes.FileNode;
+import ru.romzhel.app.nodes.Node;
+import ru.romzhel.app.nodes.PropertyNode;
 import ru.romzhel.app.services.ExcelFileService;
 import ru.romzhel.app.services.PropertyService;
-import ru.romzhel.app.utils.Dialogs;
+import ru.romzhel.app.ui_components.Dialogs;
+import ru.romzhel.app.ui_components.NavigationTree;
 import ru.romzhel.app.utils.XMLUtilities;
 
 import javax.xml.bind.JAXBException;
@@ -33,31 +31,21 @@ import java.util.ResourceBundle;
 @Data
 public class MainAppController implements Initializable {
     public static final Logger logger = LogManager.getLogger();
-    public final TemplateRootNode templateRootNode = new TemplateRootNode();
-    public final GlossaryRootNode glossaryRootNode = new GlossaryRootNode();
-    public final FileRootNode fileRootNode = new FileRootNode();
-    final RootNode rootNode = new RootNode();
     public BooleanProperty closeProperty = new SimpleBooleanProperty(false);
     @FXML
     TreeView<Node<?>> tvNavi;
     @FXML
+    AnchorPane apNavi;
+    @FXML
     AnchorPane apWorkPane;
+    private NavigationTree navigationTree;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        rootNode.getChildren().addAll(templateRootNode, glossaryRootNode, fileRootNode);
-        tvNavi.setRoot(rootNode);
-        tvNavi.setShowRoot(false);
+        navigationTree = new NavigationTree(apNavi);
 
-        try {
-            XMLUtilities.loadAll(this);
-        } catch (Exception e) {
-            logger.error("Ошибка загрузки сохраненных данных: {}", e.getMessage(), e);
-            Dialogs.showMessage("Ошибка загрузки данных рабочей среды", e.getMessage());
-        }
-
-        tvNavi.setOnMouseClicked(event -> {
-            Node<?> node = (Node<?>) tvNavi.getFocusModel().getFocusedItem();
+        navigationTree.setOnMouseClicked(event -> {
+            Node<?> node = (Node<?>) navigationTree.getFocusModel().getFocusedItem();
 
             if (node == null) {
                 return;
@@ -79,37 +67,12 @@ public class MainAppController implements Initializable {
             }
         });
 
-        tvNavi.setCellFactory(new Callback<TreeView<Node<?>>, TreeCell<Node<?>>>() {
-            public TreeCell<Node<?>> call(TreeView<Node<?>> param) {
-                final TreeCell<Node<?>> source = new TreeCell<Node<?>>() {
-                    @Override
-                    protected void updateItem(Node<?> item, boolean empty) {
-                        super.updateItem(item, empty);
-
-                        if (item != null) {
-                            setText(item.toString());
-                            setContextMenu(item.getContextMenu());
-                            setStyle(item.getStyle());
-                        } else {
-                            setText(null);
-                            setContextMenu(null);
-                        }
-                    }
-                };
-
-                source.setOnDragDetected(event -> {
-                    Dragboard dragboard = source.startDragAndDrop(TransferMode.LINK);
-                    ClipboardContent content = new ClipboardContent();
-                    content.putString(source.getText());
-                    dragboard.setContent(content);
-
-                    event.consume();
-                });
-
-                return source;
-            }
-        });
-
+        try {
+            XMLUtilities.loadAll(this);
+        } catch (Exception e) {
+            logger.error("Ошибка загрузки сохраненных данных: {}", e.getMessage(), e);
+            Dialogs.showMessage("Ошибка загрузки данных рабочей среды", e.getMessage());
+        }
     }
 
     public void openFile() {
@@ -122,7 +85,7 @@ public class MainAppController implements Initializable {
                 for (Property property : PropertyService.getInstance().getPropertiesByOrder(fileNode.getData())) {
                     fileNode.getChildren().add(new PropertyNode(property));
                 }
-                fileRootNode.getChildren().add(fileNode);
+                navigationTree.getFileRootNode().getChildren().add(fileNode);
                 ExcelFileService.getInstance().getFileMap().put(fileNode.getData().getFileName(), fileNode.getData());
             }
 

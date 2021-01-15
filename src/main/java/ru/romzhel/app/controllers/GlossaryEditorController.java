@@ -35,7 +35,7 @@ public class GlossaryEditorController implements Initializable, NodeController<M
                     .forEach(s -> stringGlossary.add(String.valueOf(s)));
 
             if (instigatorNode instanceof GlossaryRootNode) {
-                mainAppController.glossaryRootNode.getChildren().add(new GlossaryNode(stringGlossary));
+                mainAppController.getNavigationTree().getGlossaryRootNode().getChildren().add(new GlossaryNode(stringGlossary));
                 GlossaryService.getInstance().getGlossaryMap().put(stringGlossary.getName(), stringGlossary);
             } else if (instigatorNode instanceof GlossaryNode) {
                 ((GlossaryNode) instigatorNode).setData(stringGlossary);

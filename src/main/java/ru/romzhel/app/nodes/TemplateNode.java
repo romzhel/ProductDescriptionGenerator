@@ -3,7 +3,7 @@ package ru.romzhel.app.nodes;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TreeItem;
 import ru.romzhel.app.entities.DescriptionTemplate;
-import ru.romzhel.app.utils.ContextMenuFactory;
+import ru.romzhel.app.ui_components.ContextMenuFactory;
 
 public class TemplateNode extends TreeItem<Node<?>> implements Node<DescriptionTemplate> {
     private DescriptionTemplate descriptionTemplate;
@@ -47,6 +47,6 @@ public class TemplateNode extends TreeItem<Node<?>> implements Node<DescriptionT
 
     @Override
     public String getStyle() {
-        return null;
+        return "";
     }
 }

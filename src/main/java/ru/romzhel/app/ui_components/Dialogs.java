@@ -1,4 +1,4 @@
-package ru.romzhel.app.utils;
+package ru.romzhel.app.ui_components;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;

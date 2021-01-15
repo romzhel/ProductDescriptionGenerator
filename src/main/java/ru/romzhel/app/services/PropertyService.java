@@ -1,10 +1,13 @@
 package ru.romzhel.app.services;
 
+import javafx.scene.control.TreeItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import ru.romzhel.app.entities.Property;
+import ru.romzhel.app.nodes.FileNode;
+import ru.romzhel.app.nodes.Node;
 import ru.romzhel.app.utils.ExcelInputFile;
 
 import java.util.Arrays;
@@ -75,6 +78,14 @@ public class PropertyService {
         return excelInputFile.getPropertyMap().values().stream()
                 .sorted((o1, o2) -> o1.getOrder() - o2.getOrder())
                 .collect(Collectors.toList());
+    }
+
+    public void reorderProperties(FileNode fileNode) {
+        ExcelInputFile excelInputFile = fileNode.getData();
+        int order = 0;
+        for (TreeItem<Node<?>> childNode : fileNode.getChildren()) {
+            excelInputFile.getPropertyMap().get(((Node) childNode).getName()).setOrder(order++);
+        }
     }
 
 

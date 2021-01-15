@@ -3,7 +3,7 @@ package ru.romzhel.app.nodes;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TreeItem;
 import ru.romzhel.app.entities.StringGlossary;
-import ru.romzhel.app.utils.ContextMenuFactory;
+import ru.romzhel.app.ui_components.ContextMenuFactory;
 
 public class GlossaryNode extends TreeItem<Node<?>> implements Node<StringGlossary> {
     private StringGlossary data;

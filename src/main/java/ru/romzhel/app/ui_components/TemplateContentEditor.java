@@ -1,4 +1,4 @@
-package ru.romzhel.app.utils;
+package ru.romzhel.app.ui_components;
 
 import javafx.concurrent.Task;
 import javafx.scene.input.DragEvent;
@@ -16,6 +16,7 @@ import ru.romzhel.app.entities.StringGlossary;
 import ru.romzhel.app.services.ExcelFileService;
 import ru.romzhel.app.services.GlossaryService;
 import ru.romzhel.app.services.PropertyService;
+import ru.romzhel.app.utils.ExcelInputFile;
 
 import java.time.Duration;
 import java.util.Collection;
