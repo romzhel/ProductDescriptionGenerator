@@ -2,6 +2,7 @@ package ru.romzhel.app.nodes;
 
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TreeItem;
+import ru.romzhel.app.ui_components.ContextMenuFactory;
 
 public class FileRootNode extends TreeItem<Node<?>> implements Node<String> {
 
@@ -17,7 +18,7 @@ public class FileRootNode extends TreeItem<Node<?>> implements Node<String> {
 
     @Override
     public ContextMenu getContextMenu() {
-        return null;
+        return new ContextMenu(ContextMenuFactory.getInstance().createAddFilesMenuItem(this));
     }
 
     @Override

@@ -1,12 +1,12 @@
 package ru.romzhel.app.nodes;
 
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.TreeItem;
+import ru.romzhel.app.entities.DescriptionTemplate;
 
-public class TemplateRootNode extends TreeItem<Node<?>> implements Node<String> {
+public class TemplateRootNode extends TemplateNode {
 
     public TemplateRootNode() {
-        super();
+        super(new DescriptionTemplate());
         setValue(this);
     }
 
@@ -21,13 +21,13 @@ public class TemplateRootNode extends TreeItem<Node<?>> implements Node<String> 
     }
 
     @Override
-    public String getData() {
-        return "";
+    public DescriptionTemplate getData() {
+        return descriptionTemplate;
     }
 
     @Override
-    public void setData(String data) {
-
+    public void setData(DescriptionTemplate descriptionTemplate) {
+        this.descriptionTemplate = descriptionTemplate;
     }
 
     @Override

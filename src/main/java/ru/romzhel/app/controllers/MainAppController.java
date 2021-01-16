@@ -3,7 +3,6 @@ package ru.romzhel.app.controllers;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.AnchorPane;
@@ -16,6 +15,7 @@ import ru.romzhel.app.nodes.FileNode;
 import ru.romzhel.app.nodes.Node;
 import ru.romzhel.app.nodes.PropertyNode;
 import ru.romzhel.app.services.ExcelFileService;
+import ru.romzhel.app.services.NavigationTreeService;
 import ru.romzhel.app.services.PropertyService;
 import ru.romzhel.app.ui_components.Dialogs;
 import ru.romzhel.app.ui_components.NavigationTree;
@@ -23,7 +23,6 @@ import ru.romzhel.app.utils.XMLUtilities;
 
 import javax.xml.bind.JAXBException;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -42,27 +41,12 @@ public class MainAppController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        NavigationTreeService.init(this);
         navigationTree = new NavigationTree(apNavi);
 
         navigationTree.setOnMouseClicked(event -> {
             Node<?> node = (Node<?>) navigationTree.getSelectionModel().getSelectedItem();
-            logger.trace("выбран node '{}'", node);
-
-            if (node == null || node.getWorkPaneFxmlPath() == null || node.getWorkPaneFxmlPath().isEmpty()) {
-                return;
-            }
-
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(node.getWorkPaneFxmlPath()));
-                AnchorPane anchorPane = loader.load();
-                apWorkPane.getChildren().clear();
-                apWorkPane.getChildren().addAll(anchorPane.getChildren());
-
-                NodeController<MainAppController> controller = loader.getController();
-                controller.injectMainController(this, node);
-            } catch (IOException e) {
-                logger.error("Ошибка загрузки UI: {}", e.getMessage(), e);
-            }
+            NavigationTreeService.getInstance().navigateTo(node);
         });
 
         try {

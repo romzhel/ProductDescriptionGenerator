@@ -16,7 +16,7 @@ public class StringGlossary implements Glossary {
     private List<String> glossaryItems;
     @XmlTransient
     private int nextIndex;
-    private String name;
+    private String name = "";
 
     public StringGlossary() {
         this.glossaryItems = new ArrayList<>();

@@ -13,7 +13,7 @@
                    AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="28.0"/>
         <Label layoutX="15.0" layoutY="32.0" text="Название"/>
         <Button fx:id="btnSave" layoutX="429.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0"
-                prefWidth="144.0" text="Сохранить" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="27.0"/>
+                prefWidth="144.0" text="Добавить" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="27.0"/>
         <TextArea fx:id="taItems" layoutX="76.0" layoutY="71.0" prefHeight="271.0" prefWidth="504.0"
                   AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="20.0"
                   AnchorPane.topAnchor="71.0"/>

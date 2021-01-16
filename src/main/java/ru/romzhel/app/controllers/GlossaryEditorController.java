@@ -10,6 +10,7 @@ import ru.romzhel.app.nodes.GlossaryNode;
 import ru.romzhel.app.nodes.GlossaryRootNode;
 import ru.romzhel.app.nodes.Node;
 import ru.romzhel.app.services.GlossaryService;
+import ru.romzhel.app.ui_components.Dialogs;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,6 +28,11 @@ public class GlossaryEditorController implements Initializable, NodeController<M
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         btnSave.setOnAction(e -> {
+            if (tfName.getText().isEmpty() || GlossaryService.getInstance().getGlossaryMap().get(tfName.getText()) != null) {
+                Dialogs.showMessage("Добавление словаря", "Словарю не задано имя или словарь с таким именем уже существует");
+                return;
+            }
+
             StringGlossary stringGlossary = new StringGlossary();
             stringGlossary.setName(tfName.getText());
             stringGlossary.setGlossaryItems(GlossaryService.getInstance().convertToList(taItems.getText()));
@@ -34,6 +40,8 @@ public class GlossaryEditorController implements Initializable, NodeController<M
             if (instigatorNode instanceof GlossaryRootNode) {
                 mainAppController.getNavigationTree().getGlossaryRootNode().getChildren().add(new GlossaryNode(stringGlossary));
                 GlossaryService.getInstance().getGlossaryMap().put(stringGlossary.getName(), stringGlossary);
+
+                ((GlossaryRootNode) instigatorNode).setData(new StringGlossary());
                 tfName.setText("");
                 taItems.setText("");
             } else if (instigatorNode instanceof GlossaryNode) {
@@ -61,5 +69,7 @@ public class GlossaryEditorController implements Initializable, NodeController<M
             tfName.setText(stringGlossary.getName());
             taItems.setText(String.join("\n", stringGlossary.getGlossaryItems()));
         }
+
+        btnSave.setDisable(!(instigatorNode instanceof GlossaryRootNode));
     }
 }

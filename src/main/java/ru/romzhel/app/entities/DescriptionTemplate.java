@@ -10,8 +10,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "template")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DescriptionTemplate {
-    private String name;
+    private String name = "";
     private ProductGroup linkedGroup;
-    private String linkedFileName;
-    private String content;
+    private String linkedFileName = "";
+    private String content = "";
 }

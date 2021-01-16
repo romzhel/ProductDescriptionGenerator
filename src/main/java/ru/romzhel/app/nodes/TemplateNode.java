@@ -6,7 +6,7 @@ import ru.romzhel.app.entities.DescriptionTemplate;
 import ru.romzhel.app.ui_components.ContextMenuFactory;
 
 public class TemplateNode extends TreeItem<Node<?>> implements Node<DescriptionTemplate> {
-    private DescriptionTemplate descriptionTemplate;
+    protected DescriptionTemplate descriptionTemplate;
 
     public TemplateNode(DescriptionTemplate descriptionTemplate) {
         super();

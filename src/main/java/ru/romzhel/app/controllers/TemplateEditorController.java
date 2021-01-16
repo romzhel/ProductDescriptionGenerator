@@ -15,6 +15,7 @@ import ru.romzhel.app.nodes.Node;
 import ru.romzhel.app.nodes.TemplateNode;
 import ru.romzhel.app.nodes.TemplateRootNode;
 import ru.romzhel.app.services.TemplateService;
+import ru.romzhel.app.ui_components.Dialogs;
 import ru.romzhel.app.ui_components.TemplateContentEditor;
 
 import java.net.URL;
@@ -26,8 +27,6 @@ public class TemplateEditorController implements Initializable, NodeController<M
     TextField tfTemplateName;
     @FXML
     TextField tfTemplateLink;
-    /*@FXML
-    TextArea taContent;*/
     @FXML
     Button btnSave;
     private MainAppController mainAppController;
@@ -58,15 +57,41 @@ public class TemplateEditorController implements Initializable, NodeController<M
             e.consume();
         });
 
+        tfTemplateName.textProperty().addListener((observable, oldValue, newValue) -> {
+            ((TemplateNode) instigatorNode).getData().setName(newValue);
+        });
+
+        tfTemplateLink.textProperty().addListener((observable, oldValue, newValue) -> {
+            ((TemplateNode) instigatorNode).getData().setLinkedFileName(newValue);
+            String content = contentEditor.getText();
+            contentEditor.clear();
+            contentEditor.appendText(content);
+        });
+
+        contentEditor.textProperty().addListener((observable, oldValue, newValue) ->
+                ((TemplateNode) instigatorNode).getData().setContent(newValue));
+
         btnSave.setOnAction(e -> {
-            DescriptionTemplate descriptionTemplate = new DescriptionTemplate();
-            descriptionTemplate.setName(tfTemplateName.getText());
+            DescriptionTemplate descriptionTemplate = ((TemplateNode) instigatorNode).getData();
+
+            if (descriptionTemplate.getName().isEmpty() || TemplateService.getInstance().getTemplateMap().get(descriptionTemplate.getName()) != null) {
+                Dialogs.showMessage("Добавление шаблона", "Шаблону не задано имя или шаблон с таким именем уже существует");
+                return;
+            }
+
+            /*descriptionTemplate.setName(tfTemplateName.getText());
             descriptionTemplate.setLinkedFileName(tfTemplateLink.getText());
-            descriptionTemplate.setContent(contentEditor.getText());
+            descriptionTemplate.setContent(contentEditor.getText());*/
 
             if (instigatorNode instanceof TemplateRootNode) {
-                mainAppController.getNavigationTree().getTemplateRootNode().getChildren().add(new TemplateNode(descriptionTemplate));
+                TemplateNode newNode = new TemplateNode(descriptionTemplate);
+                mainAppController.getNavigationTree().getTemplateRootNode().getChildren().add(newNode);
                 TemplateService.getInstance().getTemplateMap().put(descriptionTemplate.getName(), descriptionTemplate);
+
+                ((TemplateRootNode) instigatorNode).setData(new DescriptionTemplate());
+                tfTemplateName.setText("");
+                tfTemplateLink.setText("");
+                contentEditor.clear();
             } else if (instigatorNode instanceof TemplateNode) {
                 ((TemplateNode) instigatorNode).setData(descriptionTemplate);
                 TemplateService.getInstance().getTemplateMap().put(descriptionTemplate.getName(), descriptionTemplate);
@@ -81,12 +106,14 @@ public class TemplateEditorController implements Initializable, NodeController<M
 
         if (instigatorNode instanceof TemplateNode) {
             DescriptionTemplate descriptionTemplate = ((TemplateNode) instigatorNode).getData();
-            tfTemplateName.setText(descriptionTemplate.getName());
-            tfTemplateLink.setText(descriptionTemplate.getLinkedFileName());
             contentEditor.linkTemplate(descriptionTemplate);
             logger.debug("link ContentEditor with: {}", descriptionTemplate.getName());
             contentEditor.replaceText(descriptionTemplate.getContent());
+            tfTemplateName.setText(descriptionTemplate.getName());
+            tfTemplateLink.setText(descriptionTemplate.getLinkedFileName());
         }
+
+        btnSave.setDisable(!(instigatorNode instanceof TemplateRootNode));
 
         mainController.closeProperty.addListener((observable, oldValue, newValue) -> {
             if (newValue) {
