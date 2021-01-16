@@ -42,7 +42,7 @@ public class PropertyNode extends TreeItem<Node<?>> implements Node<Property> {
     }
 
     @Override
-    public String getWorkPanePath() {
+    public String getWorkPaneFxmlPath() {
         return null;
     }
 

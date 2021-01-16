@@ -1,12 +1,12 @@
 package ru.romzhel.app.nodes;
 
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.TreeItem;
+import ru.romzhel.app.entities.StringGlossary;
 
-public class GlossaryRootNode extends TreeItem<Node<?>> implements Node<String> {
+public class GlossaryRootNode extends GlossaryNode {
 
     public GlossaryRootNode() {
-        super();
+        super(new StringGlossary());
         setValue(this);
     }
 
@@ -21,13 +21,13 @@ public class GlossaryRootNode extends TreeItem<Node<?>> implements Node<String> 
     }
 
     @Override
-    public String getData() {
-        return "";
+    public StringGlossary getData() {
+        return data;
     }
 
     @Override
-    public void setData(String data) {
-
+    public void setData(StringGlossary data) {
+        this.data = data;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class GlossaryRootNode extends TreeItem<Node<?>> implements Node<String> 
     }
 
     @Override
-    public String getWorkPanePath() {
+    public String getWorkPaneFxmlPath() {
         return "/fxml/glossary_editor.fxml";
     }
 

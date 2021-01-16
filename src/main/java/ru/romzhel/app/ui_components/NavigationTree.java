@@ -59,6 +59,7 @@ public class NavigationTree extends TreeView<Node<?>> {
                 };
 
                 source.setOnDragDetected(event -> {
+                    logger.trace("navi tree OnDragDetected");
                     draggedItem = source.getTreeItem();
                     Dragboard dragboard = source.startDragAndDrop(TransferMode.ANY);
                     ClipboardContent content = new ClipboardContent();
@@ -75,7 +76,8 @@ public class NavigationTree extends TreeView<Node<?>> {
                     }
 
                     TreeItem thisItem = source.getTreeItem();
-                    if (draggedItem == null || !(thisItem instanceof PropertyNode) || draggedItem == thisItem) {
+//                    if (draggedItem == null || !(thisItem instanceof PropertyNode) || draggedItem == thisItem) {
+                    if (draggedItem == null || thisItem == null || draggedItem == thisItem) {
                         return;
                     }
 
@@ -88,6 +90,7 @@ public class NavigationTree extends TreeView<Node<?>> {
                 });
 
                 source.setOnDragDropped((DragEvent event) -> {
+                    logger.trace("navi tree OnDragDropped");
                     Dragboard db = event.getDragboard();
                     boolean success = false;
                     if (!db.hasString()) {
@@ -114,6 +117,7 @@ public class NavigationTree extends TreeView<Node<?>> {
                 });
 
                 source.setOnDragDone((DragEvent event) -> {
+                    logger.trace("navi tree OnDragDone");
                     clearDropLocation();
                     if (source.getTreeItem() instanceof PropertyNode) {
                         PropertyService.getInstance().reorderProperties((FileNode) source.getTreeItem().getParent());

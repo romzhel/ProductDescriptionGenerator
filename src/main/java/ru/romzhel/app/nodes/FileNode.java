@@ -56,7 +56,7 @@ public class FileNode extends TreeItem<Node<?>> implements Node<ExcelInputFile> 
     }
 
     @Override
-    public String getWorkPanePath() {
+    public String getWorkPaneFxmlPath() {
         return null;
     }
 

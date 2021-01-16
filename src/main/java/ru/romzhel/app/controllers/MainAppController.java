@@ -45,25 +45,23 @@ public class MainAppController implements Initializable {
         navigationTree = new NavigationTree(apNavi);
 
         navigationTree.setOnMouseClicked(event -> {
-            Node<?> node = (Node<?>) navigationTree.getFocusModel().getFocusedItem();
+            Node<?> node = (Node<?>) navigationTree.getSelectionModel().getSelectedItem();
+            logger.trace("выбран node '{}'", node);
 
-            if (node == null) {
+            if (node == null || node.getWorkPaneFxmlPath() == null || node.getWorkPaneFxmlPath().isEmpty()) {
                 return;
             }
 
-            String workPanePath = node.getWorkPanePath();
-            if (workPanePath != null && !workPanePath.isEmpty()) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource(workPanePath));
-                    AnchorPane anchorPane = loader.load();
-                    apWorkPane.getChildren().clear();
-                    apWorkPane.getChildren().addAll(anchorPane.getChildren());
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(node.getWorkPaneFxmlPath()));
+                AnchorPane anchorPane = loader.load();
+                apWorkPane.getChildren().clear();
+                apWorkPane.getChildren().addAll(anchorPane.getChildren());
 
-                    NodeController<MainAppController> controller = loader.getController();
-                    controller.injectMainController(this, node);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                NodeController<MainAppController> controller = loader.getController();
+                controller.injectMainController(this, node);
+            } catch (IOException e) {
+                logger.error("Ошибка загрузки UI: {}", e.getMessage(), e);
             }
         });
 

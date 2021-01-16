@@ -6,7 +6,7 @@ import ru.romzhel.app.entities.StringGlossary;
 import ru.romzhel.app.ui_components.ContextMenuFactory;
 
 public class GlossaryNode extends TreeItem<Node<?>> implements Node<StringGlossary> {
-    private StringGlossary data;
+    protected StringGlossary data;
 
     public GlossaryNode(StringGlossary stringGlossary) {
         super();
@@ -40,7 +40,7 @@ public class GlossaryNode extends TreeItem<Node<?>> implements Node<StringGlossa
     }
 
     @Override
-    public String getWorkPanePath() {
+    public String getWorkPaneFxmlPath() {
         return "/fxml/glossary_editor.fxml";
     }
 

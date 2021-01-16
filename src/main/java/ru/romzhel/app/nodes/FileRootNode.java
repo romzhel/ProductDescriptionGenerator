@@ -36,7 +36,7 @@ public class FileRootNode extends TreeItem<Node<?>> implements Node<String> {
     }
 
     @Override
-    public String getWorkPanePath() {
+    public String getWorkPaneFxmlPath() {
         return null;
     }
 

@@ -12,7 +12,6 @@ import ru.romzhel.app.nodes.Node;
 import ru.romzhel.app.services.GlossaryService;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class GlossaryEditorController implements Initializable, NodeController<MainAppController> {
@@ -30,18 +29,25 @@ public class GlossaryEditorController implements Initializable, NodeController<M
         btnSave.setOnAction(e -> {
             StringGlossary stringGlossary = new StringGlossary();
             stringGlossary.setName(tfName.getText());
-            Arrays.stream(taItems.getText().split("\n"))
-                    .filter(s -> !String.valueOf(s).isEmpty())
-                    .forEach(s -> stringGlossary.add(String.valueOf(s)));
+            stringGlossary.setGlossaryItems(GlossaryService.getInstance().convertToList(taItems.getText()));
 
             if (instigatorNode instanceof GlossaryRootNode) {
                 mainAppController.getNavigationTree().getGlossaryRootNode().getChildren().add(new GlossaryNode(stringGlossary));
                 GlossaryService.getInstance().getGlossaryMap().put(stringGlossary.getName(), stringGlossary);
+                tfName.setText("");
+                taItems.setText("");
             } else if (instigatorNode instanceof GlossaryNode) {
                 ((GlossaryNode) instigatorNode).setData(stringGlossary);
                 GlossaryService.getInstance().getGlossaryMap().put(stringGlossary.getName(), stringGlossary);
             }
         });
+
+        taItems.textProperty().addListener((observable, oldValue, newValue) -> {
+            ((GlossaryNode) instigatorNode).getData().setGlossaryItems(GlossaryService.getInstance().convertToList(taItems.getText()));
+        });
+
+        tfName.textProperty().addListener((observable, oldValue, newValue) ->
+                ((GlossaryNode) instigatorNode).getData().setName(tfName.getText()));
     }
 
     @Override

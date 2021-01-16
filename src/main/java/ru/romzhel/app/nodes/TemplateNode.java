@@ -41,7 +41,7 @@ public class TemplateNode extends TreeItem<Node<?>> implements Node<DescriptionT
     }
 
     @Override
-    public String getWorkPanePath() {
+    public String getWorkPaneFxmlPath() {
         return "/fxml/template_editor.fxml";
     }
 

@@ -26,7 +26,7 @@ public class ContextMenuFactory {
         return instance;
     }
 
-    public MenuItem createDeleteMenuItem(TreeItem<?> treeItem) {
+    public MenuItem createDeleteMenuItem(TreeItem<?> treeItem) {//todo очистка/отображение новых данных в UI компонентах после удаления
         MenuItem menuItem = new MenuItem("Удалить    ");
         menuItem.setOnAction(event -> {
             if (treeItem instanceof TemplateNode) {
@@ -44,7 +44,9 @@ public class ContextMenuFactory {
                 Property removedProperty = excelInputFile.getPropertyMap().remove(nodeForDelete.getName());
                 logger.trace("Удалено свойство: {} - {}", excelInputFile.getFileName(), removedProperty);
             }
+
             treeItem.getParent().getChildren().remove(treeItem);
+
         });
         return menuItem;
     }
@@ -53,7 +55,6 @@ public class ContextMenuFactory {
         if (!(treeItem instanceof TemplateNode)) {
             return null;
         }
-
 
         MenuItem menuItem = new MenuItem("Сгенерировать     ");
         menuItem.setOnAction(event -> {

@@ -7,22 +7,18 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Data
 @XmlRootElement(name = "glossary")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class StringGlossary implements Glossary {
-    private Map<String, Integer> glossaryMap;
     private List<String> glossaryItems;
     @XmlTransient
     private int nextIndex;
     private String name;
 
     public StringGlossary() {
-        this.glossaryMap = new HashMap<>();
         this.glossaryItems = new ArrayList<>();
     }
 
@@ -32,28 +28,20 @@ public class StringGlossary implements Glossary {
     }
 
     @Override
-    public String getNext(String text) {
-        return glossaryItems.get(nextIndex++ % glossaryItems.size());
-    }
-
-    @Override
     public void add(String text) {
         glossaryItems.add(text);
-        glossaryMap.put(text, glossaryItems.indexOf(text));
     }
 
     @Override
     public void remove(String text) {
         glossaryItems.remove(text);
-        glossaryItems.remove(text);
-        int removedIndex = glossaryMap.remove(text);
-        glossaryMap.replaceAll((s, integer) -> integer > removedIndex ? integer - 1 : integer);
     }
 
     @Override
     public void edit(String oldValue, String newValue) {
-        int removedIndex = glossaryMap.remove(oldValue);
-        glossaryMap.put(newValue, removedIndex);
-        glossaryItems.set(removedIndex, newValue);
+        int editedIndex = glossaryItems.indexOf(oldValue);
+        if (editedIndex >= 0) {
+            glossaryItems.set(editedIndex, newValue);
+        }
     }
 }
