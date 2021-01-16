@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.romzhel.app.controllers.MainAppController;
+import ru.romzhel.app.ui_components.Dialogs;
 import ru.romzhel.app.utils.XMLUtilities;
 
 import javax.xml.bind.JAXBException;
@@ -48,10 +49,16 @@ public class MainApp extends Application {
         primaryStage.setOnCloseRequest(event -> {
             ((MainAppController) loader.getController()).closeProperty.set(true);
             try {
-                XMLUtilities.saveAll(loader.getController());
-                logger.trace("Рабочая среда сохранена");
+                if (Dialogs.confirm("Завершение работы", "Желаете сохранить все сделанные изменения?")) {
+                    XMLUtilities.saveAll();
+                    logger.trace("Рабочая среда сохранена");
+                }
             } catch (JAXBException e) {
-                logger.warn("Ошибка сохранения");
+                logger.warn("Ошибка сохранения {}", e.getMessage(), e);
+                Dialogs.showMessage("Ошибка сохранения", e.getMessage());
+
+                event.consume();
+                return;
             }
             logger.trace("Выход из приложения");
         });

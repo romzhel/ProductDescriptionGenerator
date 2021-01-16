@@ -14,7 +14,7 @@
             <menus>
                 <Menu mnemonicParsing="false" text="Рабочая среда     ">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#saveToFile" text="Сохранить данные     "/>
+                        <MenuItem mnemonicParsing="false" onAction="#saveWorkEnvToDisk" text="Сохранить данные     "/>
                     </items>
                 </Menu>
             </menus>

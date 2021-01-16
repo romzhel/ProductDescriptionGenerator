@@ -1,14 +1,13 @@
 package ru.romzhel.app.nodes;
 
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.TreeItem;
 import ru.romzhel.app.ui_components.ContextMenuFactory;
 
-public class FileRootNode extends TreeItem<Node<?>> implements Node<String> {
+public class FileRootNode extends AbstractNode<String> {
 
     public FileRootNode() {
         super();
-        setValue(this);
+        setValue(getName());
     }
 
     @Override
@@ -22,21 +21,6 @@ public class FileRootNode extends TreeItem<Node<?>> implements Node<String> {
     }
 
     @Override
-    public String getData() {
-        return "";
-    }
-
-    @Override
-    public void setData(String data) {
-
-    }
-
-    @Override
-    public String toString() {
-        return getName();
-    }
-
-    @Override
     public String getWorkPaneFxmlPath() {
         return null;
     }
@@ -45,6 +29,4 @@ public class FileRootNode extends TreeItem<Node<?>> implements Node<String> {
     public String getStyle() {
         return "-fx-text-fill: saddleBrown; -fx-font-weight: bold;";
     }
-
-
 }

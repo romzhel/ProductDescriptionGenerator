@@ -37,7 +37,7 @@ public class ContextMenuFactory {
                 return;
             }
 
-            ChangeListener<TreeItem<Node<?>>> changeSelectionListener = (observable, oldValue, newValue) -> {
+            ChangeListener<TreeItem<String>> changeSelectionListener = (observable, oldValue, newValue) -> {
                 if (newValue != null) {
                     NavigationTreeService.getInstance().navigateTo((Node<?>) newValue);
                 }

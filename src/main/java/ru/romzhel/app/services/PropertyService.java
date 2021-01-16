@@ -7,7 +7,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import ru.romzhel.app.entities.Property;
 import ru.romzhel.app.nodes.FileNode;
-import ru.romzhel.app.nodes.Node;
+import ru.romzhel.app.nodes.PropertyNode;
 import ru.romzhel.app.utils.ExcelInputFile;
 
 import java.util.Arrays;
@@ -83,8 +83,8 @@ public class PropertyService {
     public void reorderProperties(FileNode fileNode) {
         ExcelInputFile excelInputFile = fileNode.getData();
         int order = 0;
-        for (TreeItem<Node<?>> childNode : fileNode.getChildren()) {
-            excelInputFile.getPropertyMap().get(((Node) childNode).getName()).setOrder(order++);
+        for (TreeItem<String> childNode : fileNode.getChildren()) {
+            excelInputFile.getPropertyMap().get(((PropertyNode) childNode).getName()).setOrder(order++);
         }
     }
 

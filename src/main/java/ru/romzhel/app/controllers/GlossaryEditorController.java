@@ -5,10 +5,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
 import ru.romzhel.app.entities.StringGlossary;
 import ru.romzhel.app.nodes.GlossaryNode;
 import ru.romzhel.app.nodes.GlossaryRootNode;
 import ru.romzhel.app.nodes.Node;
+import ru.romzhel.app.nodes.TemplateNode;
 import ru.romzhel.app.services.GlossaryService;
 import ru.romzhel.app.ui_components.Dialogs;
 
@@ -54,8 +56,14 @@ public class GlossaryEditorController implements Initializable, NodeController<M
             ((GlossaryNode) instigatorNode).getData().setGlossaryItems(GlossaryService.getInstance().convertToList(taItems.getText()));
         });
 
-        tfName.textProperty().addListener((observable, oldValue, newValue) ->
-                ((GlossaryNode) instigatorNode).getData().setName(tfName.getText()));
+        tfName.textProperty().addListener((observable, oldValue, newValue) -> {
+            ((GlossaryNode) instigatorNode).getData().setName(tfName.getText());
+            if (instigatorNode instanceof TemplateNode) {
+                ((TreeItem<String>) instigatorNode).setValue(null);
+                ((TreeItem<String>) instigatorNode).setValue(tfName.getText());
+            }
+        });
+
     }
 
     @Override
@@ -70,6 +78,7 @@ public class GlossaryEditorController implements Initializable, NodeController<M
             taItems.setText(String.join("\n", stringGlossary.getGlossaryItems()));
         }
 
+        tfName.setEditable(instigatorNode instanceof GlossaryRootNode);
         btnSave.setDisable(!(instigatorNode instanceof GlossaryRootNode));
     }
 }

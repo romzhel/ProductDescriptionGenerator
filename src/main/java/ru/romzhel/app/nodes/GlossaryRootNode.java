@@ -7,7 +7,7 @@ public class GlossaryRootNode extends GlossaryNode {
 
     public GlossaryRootNode() {
         super(new StringGlossary());
-        setValue(this);
+        setValue(getName());
     }
 
     @Override
@@ -18,21 +18,6 @@ public class GlossaryRootNode extends GlossaryNode {
     @Override
     public ContextMenu getContextMenu() {
         return null;
-    }
-
-    @Override
-    public StringGlossary getData() {
-        return data;
-    }
-
-    @Override
-    public void setData(StringGlossary data) {
-        this.data = data;
-    }
-
-    @Override
-    public String toString() {
-        return getName();
     }
 
     @Override

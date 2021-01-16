@@ -4,6 +4,20 @@
         <entry>
             <key>(DAC) синонимы "характеристики"</key>
             <value>
+                <glossaryMap>
+                    <entry>
+                        <key>параметрами</key>
+                        <value>1</value>
+                    </entry>
+                    <entry>
+                        <key>характеристиками</key>
+                        <value>0</value>
+                    </entry>
+                    <entry>
+                        <key>особенностями</key>
+                        <value>2</value>
+                    </entry>
+                </glossaryMap>
                 <glossaryItems>характеристиками</glossaryItems>
                 <glossaryItems>параметрами</glossaryItems>
                 <glossaryItems>особенностями</glossaryItems>
@@ -13,6 +27,16 @@
         <entry>
             <key>(DAC) Синонимы "усилие"</key>
             <value>
+                <glossaryMap>
+                    <entry>
+                        <key>усилие</key>
+                        <value>0</value>
+                    </entry>
+                    <entry>
+                        <key>крутящий момент</key>
+                        <value>1</value>
+                    </entry>
+                </glossaryMap>
                 <glossaryItems>усилие</glossaryItems>
                 <glossaryItems>крутящий момент</glossaryItems>
                 <name>(DAC) Синонимы "усилие"</name>
@@ -21,6 +45,20 @@
         <entry>
             <key>(DAC) Синонимы "напряжение питания"</key>
             <value>
+                <glossaryMap>
+                    <entry>
+                        <key>напряжение</key>
+                        <value>2</value>
+                    </entry>
+                    <entry>
+                        <key>напряжение питания</key>
+                        <value>0</value>
+                    </entry>
+                    <entry>
+                        <key>питание</key>
+                        <value>1</value>
+                    </entry>
+                </glossaryMap>
                 <glossaryItems>напряжение питания</glossaryItems>
                 <glossaryItems>питание</glossaryItems>
                 <glossaryItems>напряжение</glossaryItems>
@@ -30,6 +68,32 @@
         <entry>
             <key>(DAC) Типы систем</key>
             <value>
+                <glossaryMap>
+                    <entry>
+                        <key>HVAC</key>
+                        <value>4</value>
+                    </entry>
+                    <entry>
+                        <key>отопления, вентиляции и кондиционирования</key>
+                        <value>2</value>
+                    </entry>
+                    <entry>
+                        <key>отопления, вентиляции и кондиционирования воздуха</key>
+                        <value>3</value>
+                    </entry>
+                    <entry>
+                        <key>ОВиК</key>
+                        <value>5</value>
+                    </entry>
+                    <entry>
+                        <key>ОВК</key>
+                        <value>0</value>
+                    </entry>
+                    <entry>
+                        <key>вентиляции</key>
+                        <value>1</value>
+                    </entry>
+                </glossaryMap>
                 <glossaryItems>ОВК</glossaryItems>
                 <glossaryItems>вентиляции</glossaryItems>
                 <glossaryItems>отопления, вентиляции и кондиционирования</glossaryItems>
@@ -42,6 +106,32 @@
         <entry>
             <key>(DAC) Тип устройства</key>
             <value>
+                <glossaryMap>
+                    <entry>
+                        <key>электропривод заслонки</key>
+                        <value>5</value>
+                    </entry>
+                    <entry>
+                        <key>привод заслонки</key>
+                        <value>4</value>
+                    </entry>
+                    <entry>
+                        <key>привод</key>
+                        <value>0</value>
+                    </entry>
+                    <entry>
+                        <key>электропривод</key>
+                        <value>2</value>
+                    </entry>
+                    <entry>
+                        <key>привод клапана вентиляции</key>
+                        <value>3</value>
+                    </entry>
+                    <entry>
+                        <key>привод воздушной заслонки</key>
+                        <value>1</value>
+                    </entry>
+                </glossaryMap>
                 <glossaryItems>привод</glossaryItems>
                 <glossaryItems>привод воздушной заслонки</glossaryItems>
                 <glossaryItems>электропривод</glossaryItems>
@@ -54,6 +144,24 @@
         <entry>
             <key>(DAC) Типы клапанов</key>
             <value>
+                <glossaryMap>
+                    <entry>
+                        <key>клапанов вентиляции</key>
+                        <value>1</value>
+                    </entry>
+                    <entry>
+                        <key>клапанов притока и вытяжки</key>
+                        <value>0</value>
+                    </entry>
+                    <entry>
+                        <key>клапанов вентиляционных машин</key>
+                        <value>2</value>
+                    </entry>
+                    <entry>
+                        <key>клапанов</key>
+                        <value>3</value>
+                    </entry>
+                </glossaryMap>
                 <glossaryItems>клапанов притока и вытяжки</glossaryItems>
                 <glossaryItems>клапанов вентиляции</glossaryItems>
                 <glossaryItems>клапанов вентиляционных машин</glossaryItems>

@@ -7,7 +7,7 @@ public class TemplateRootNode extends TemplateNode {
 
     public TemplateRootNode() {
         super(new DescriptionTemplate());
-        setValue(this);
+        setValue(getName());
     }
 
     @Override
@@ -18,21 +18,6 @@ public class TemplateRootNode extends TemplateNode {
     @Override
     public ContextMenu getContextMenu() {
         return null;
-    }
-
-    @Override
-    public DescriptionTemplate getData() {
-        return descriptionTemplate;
-    }
-
-    @Override
-    public void setData(DescriptionTemplate descriptionTemplate) {
-        this.descriptionTemplate = descriptionTemplate;
-    }
-
-    @Override
-    public String toString() {
-        return getName();
     }
 
     @Override

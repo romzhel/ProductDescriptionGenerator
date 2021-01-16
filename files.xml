@@ -2,359 +2,11 @@
 <files>
     <fileMap>
         <entry>
-            <key>Термостаты.xlsx</key>
-            <value>
-                <file>C:\Users\Ray\Downloads\Файлы_с_характеристиками_\Термостаты.xlsx</file>
-                <propertyMap>
-                    <entry>
-                        <key>Защитная гильза</key>
-                        <value>
-                            <columnIndex>28</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Защитная гильза</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Заказной номер</key>
-                        <value>
-                            <columnIndex>0</columnIndex>
-                            <filling>FULL</filling>
-                            <name>Заказной номер</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Артикул</key>
-                        <value>
-                            <columnIndex>1</columnIndex>
-                            <filling>FULL</filling>
-                            <name>Артикул</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Группа товара</key>
-                        <value>
-                            <columnIndex>8</columnIndex>
-                            <filling>FULL</filling>
-                            <name>Группа товара</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Страна происхождения (название)</key>
-                        <value>
-                            <columnIndex>13</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Страна происхождения (название)</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Тип позиции</key>
-                        <value>
-                            <columnIndex>3</columnIndex>
-                            <filling>FULL</filling>
-                            <name>Тип позиции</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Глубина погружения</key>
-                        <value>
-                            <columnIndex>32</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Глубина погружения</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Класс защиты</key>
-                        <value>
-                            <columnIndex>18</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Класс защиты</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Класс PN</key>
-                        <value>
-                            <columnIndex>34</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Класс PN</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Точка выключения</key>
-                        <value>
-                            <columnIndex>30</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Точка выключения</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Функция термостата</key>
-                        <value>
-                            <columnIndex>37</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Функция термостата</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Мин. Заказ</key>
-                        <value>
-                            <columnIndex>5</columnIndex>
-                            <filling>FULL</filling>
-                            <name>Мин. Заказ</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Вес, кг.</key>
-                        <value>
-                            <columnIndex>7</columnIndex>
-                            <filling>FULL</filling>
-                            <name>Вес, кг.</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Диапазон задания уставки</key>
-                        <value>
-                            <columnIndex>25</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Диапазон задания уставки</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Длина упаковки</key>
-                        <value>
-                            <columnIndex>14</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Длина упаковки</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Название линейки</key>
-                        <value>
-                            <columnIndex>11</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Название линейки</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Подгруппа товара</key>
-                        <value>
-                            <columnIndex>10</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Подгруппа товара</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Изображение</key>
-                        <value>
-                            <columnIndex>16</columnIndex>
-                            <filling>FULL</filling>
-                            <name>Изображение</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Монтаж</key>
-                        <value>
-                            <columnIndex>23</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Монтаж</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Дискретные выходы</key>
-                        <value>
-                            <columnIndex>27</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Дискретные выходы</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Принцип работы термостата</key>
-                        <value>
-                            <columnIndex>36</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Принцип работы термостата</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Ширина упаковки</key>
-                        <value>
-                            <columnIndex>15</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Ширина упаковки</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Тип монтажа</key>
-                        <value>
-                            <columnIndex>38</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Тип монтажа</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Дифференциал переключения</key>
-                        <value>
-                            <columnIndex>26</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Дифференциал переключения</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Высота упаковки</key>
-                        <value>
-                            <columnIndex>17</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Высота упаковки</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Температура сброса</key>
-                        <value>
-                            <columnIndex>31</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Температура сброса</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Длина капилляра</key>
-                        <value>
-                            <columnIndex>24</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Длина капилляра</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Выходной сигнал</key>
-                        <value>
-                            <columnIndex>20</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Выходной сигнал</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Применение</key>
-                        <value>
-                            <columnIndex>19</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Применение</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Страна происхождения (код из системы)</key>
-                        <value>
-                            <columnIndex>12</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Страна происхождения (код из системы)</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Название</key>
-                        <value>
-                            <columnIndex>2</columnIndex>
-                            <filling>FULL</filling>
-                            <name>Название</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Цена, евро без НДС</key>
-                        <value>
-                            <columnIndex>4</columnIndex>
-                            <filling>FULL</filling>
-                            <name>Цена, евро без НДС</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Рабочее напряжение</key>
-                        <value>
-                            <columnIndex>22</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Рабочее напряжение</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Диапазон измерения температуры</key>
-                        <value>
-                            <columnIndex>21</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Диапазон измерения температуры</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Материал</key>
-                        <value>
-                            <columnIndex>33</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Материал</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Код группы (GBK)</key>
-                        <value>
-                            <columnIndex>6</columnIndex>
-                            <filling>FULL</filling>
-                            <name>Код группы (GBK)</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Чувствительный элемент</key>
-                        <value>
-                            <columnIndex>29</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Чувствительный элемент</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>WEB Link на продукт в каталоге</key>
-                        <value>
-                            <columnIndex>35</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>WEB Link на продукт в каталоге</name>
-                            <order>0</order>
-                        </value>
-                    </entry>
-                </propertyMap>
-            </value>
-        </entry>
-        <entry>
             <key>DAC.xlsx</key>
             <value>
-                <file>C:\Users\Ray\Downloads\DAC.xlsx</file>
+                <file>C:\UserData\z0039ukj\Siemens AG\Zheludkov, Roman (RC-RU SI BP TECH) -
+                    ProductDescriptionGenerator\_lib\DAC.xlsx
+                </file>
                 <propertyMap>
                     <entry>
                         <key>Артикул [ARTICLE]</key>
@@ -371,7 +23,7 @@
                             <columnIndex>3</columnIndex>
                             <filling>FULL</filling>
                             <name>Категория</name>
-                            <order>1</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -380,7 +32,7 @@
                             <columnIndex>6</columnIndex>
                             <filling>FULL</filling>
                             <name>Усилие привода, Н*м [dac_torque_moment]</name>
-                            <order>2</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -389,7 +41,7 @@
                             <columnIndex>21</columnIndex>
                             <filling>PARTIAL</filling>
                             <name>Тип пожарного привода</name>
-                            <order>3</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -398,7 +50,7 @@
                             <columnIndex>13</columnIndex>
                             <filling>FULL</filling>
                             <name>Вес, кг. [WEIGHT]</name>
-                            <order>4</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -407,7 +59,7 @@
                             <columnIndex>14</columnIndex>
                             <filling>PARTIAL</filling>
                             <name>Страна происхождения (название)</name>
-                            <order>5</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -416,7 +68,7 @@
                             <columnIndex>23</columnIndex>
                             <filling>PARTIAL</filling>
                             <name>Размер квадратного штока (сторона)</name>
-                            <order>6</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -425,7 +77,7 @@
                             <columnIndex>7</columnIndex>
                             <filling>PARTIAL</filling>
                             <name>Площадь заслонки, кв.м. [dac_space]</name>
-                            <order>7</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -434,7 +86,7 @@
                             <columnIndex>5</columnIndex>
                             <filling>FULL</filling>
                             <name>Возвратная пружина [dac_spring]</name>
-                            <order>8</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -443,16 +95,7 @@
                             <columnIndex>8</columnIndex>
                             <filling>FULL</filling>
                             <name>Напряжение питания [voltage]</name>
-                            <order>9</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Код группы (GBK) [GBK]</key>
-                        <value>
-                            <columnIndex>12</columnIndex>
-                            <filling>FULL</filling>
-                            <name>Код группы (GBK) [GBK]</name>
-                            <order>10</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -461,7 +104,7 @@
                             <columnIndex>18</columnIndex>
                             <filling>FULL</filling>
                             <name>Время закрытия</name>
-                            <order>11</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -470,7 +113,7 @@
                             <columnIndex>16</columnIndex>
                             <filling>FULL</filling>
                             <name>Время позиционирования</name>
-                            <order>12</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -479,7 +122,7 @@
                             <columnIndex>10</columnIndex>
                             <filling>FULL</filling>
                             <name>Наличие концевых выключателей [dac_switches]</name>
-                            <order>13</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -488,7 +131,7 @@
                             <columnIndex>25</columnIndex>
                             <filling>FULL</filling>
                             <name>Тип привода</name>
-                            <order>14</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -497,7 +140,7 @@
                             <columnIndex>28</columnIndex>
                             <filling>PARTIAL</filling>
                             <name>Настраиваемый сдвиг/диапазон</name>
-                            <order>15</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -506,7 +149,7 @@
                             <columnIndex>17</columnIndex>
                             <filling>FULL</filling>
                             <name>Время открытия</name>
-                            <order>16</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -515,7 +158,7 @@
                             <columnIndex>1</columnIndex>
                             <filling>FULL</filling>
                             <name>Изображение</name>
-                            <order>17</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -524,7 +167,7 @@
                             <columnIndex>15</columnIndex>
                             <filling>FULL</filling>
                             <name>Класс IP</name>
-                            <order>18</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -533,16 +176,7 @@
                             <columnIndex>2</columnIndex>
                             <filling>FULL</filling>
                             <name>Заказной номер [NUMBER]</name>
-                            <order>19</order>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Картинки</key>
-                        <value>
-                            <columnIndex>29</columnIndex>
-                            <filling>PARTIAL</filling>
-                            <name>Картинки</name>
-                            <order>20</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -551,7 +185,7 @@
                             <columnIndex>20</columnIndex>
                             <filling>FULL</filling>
                             <name>Анонс</name>
-                            <order>21</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -560,7 +194,7 @@
                             <columnIndex>22</columnIndex>
                             <filling>PARTIAL</filling>
                             <name>Наличе термо-размыкающего устройства (ТРУ)</name>
-                            <order>22</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -569,7 +203,7 @@
                             <columnIndex>26</columnIndex>
                             <filling>PARTIAL</filling>
                             <name>Встроенный потенциометр</name>
-                            <order>23</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -578,7 +212,7 @@
                             <columnIndex>24</columnIndex>
                             <filling>PARTIAL</filling>
                             <name>Диаметр круглого штока</name>
-                            <order>24</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -587,7 +221,7 @@
                             <columnIndex>9</columnIndex>
                             <filling>PARTIAL</filling>
                             <name>Управляющий сигнал [dac_management_signal]</name>
-                            <order>25</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -596,7 +230,7 @@
                             <columnIndex>19</columnIndex>
                             <filling>FULL</filling>
                             <name>Длина кабеля</name>
-                            <order>26</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -605,7 +239,7 @@
                             <columnIndex>27</columnIndex>
                             <filling>PARTIAL</filling>
                             <name>Обратная связь</name>
-                            <order>27</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -614,7 +248,7 @@
                             <columnIndex>4</columnIndex>
                             <filling>FULL</filling>
                             <name>Наименование элемента</name>
-                            <order>28</order>
+                            <order>0</order>
                         </value>
                     </entry>
                     <entry>
@@ -623,7 +257,7 @@
                             <columnIndex>11</columnIndex>
                             <filling>PARTIAL</filling>
                             <name>Поддерживаемые протоколы коммуникации [dac_communication]</name>
-                            <order>29</order>
+                            <order>0</order>
                         </value>
                     </entry>
                 </propertyMap>

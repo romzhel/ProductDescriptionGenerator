@@ -113,6 +113,7 @@ public class TemplateEditorController implements Initializable, NodeController<M
             tfTemplateLink.setText(descriptionTemplate.getLinkedFileName());
         }
 
+        tfTemplateName.setEditable(instigatorNode instanceof TemplateRootNode);
         btnSave.setDisable(!(instigatorNode instanceof TemplateRootNode));
 
         mainController.closeProperty.addListener((observable, oldValue, newValue) -> {

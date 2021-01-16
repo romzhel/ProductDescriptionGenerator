@@ -85,7 +85,7 @@ public class DescriptionGenerator {
         excelInputFile.close();
         try {
             excelOutputFile.save(new Dialogs().selectAnyFile(null, "Сохранение результата",
-                    Dialogs.EXCEL_FILES, "descriptions.xlsx").get(0));
+                    Dialogs.EXCEL_FILES, String.format("descriptions_%s.xlsx", templateNode.getData().getName())).get(0));
             Desktop.getDesktop().open(excelOutputFile.file);
         } catch (Exception e) {
             logger.warn("Ошибка сохранения: {}", e.getMessage());

@@ -26,7 +26,7 @@ public class XMLUtilities {
     public static final String GLOSSARY_FILE = "glossaries.xml";
     public static final String FILES_FILE = "files.xml";
 
-    public static void saveAll(MainAppController mainAppController) throws JAXBException {
+    public static void saveAll() throws JAXBException {
         saveToXml(TemplateService.class, TEMPLATE_FILE, TemplateService.getInstance());
         saveToXml(GlossaryService.class, GLOSSARY_FILE, GlossaryService.getInstance());
         saveToXml(ExcelFileService.class, FILES_FILE, ExcelFileService.getInstance());
