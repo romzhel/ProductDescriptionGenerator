@@ -13,7 +13,7 @@
 /_certs/
 /_manuals/
 *.db-journal
-
-*.log
-/_logs/log_25.06.2020_02.16.04_Ray.zip
-/_logs/
+/logs/
+/files.xml
+/glossaries.xml
+/templates.xml

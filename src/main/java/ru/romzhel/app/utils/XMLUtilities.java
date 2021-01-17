@@ -2,7 +2,6 @@ package ru.romzhel.app.utils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.romzhel.app.controllers.MainAppController;
 import ru.romzhel.app.entities.Property;
 import ru.romzhel.app.nodes.FileNode;
 import ru.romzhel.app.nodes.GlossaryNode;
@@ -13,6 +12,7 @@ import ru.romzhel.app.services.GlossaryService;
 import ru.romzhel.app.services.PropertyService;
 import ru.romzhel.app.services.TemplateService;
 import ru.romzhel.app.ui_components.Dialogs;
+import ru.romzhel.app.ui_components.NavigationTree;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -57,33 +57,33 @@ public class XMLUtilities {
         return jaxbUnmarshaller.unmarshal(xmlFile);
     }
 
-    public static void loadAll(MainAppController mainAppController) throws Exception {
-        loadTemplates(mainAppController);
-        loadGlossaries(mainAppController);
-        loadFilesInfo(mainAppController);
+    public static void loadAll() throws Exception {
+        loadTemplates();
+        loadGlossaries();
+        loadFilesInfo();
     }
 
-    private static void loadTemplates(MainAppController mainAppController) throws Exception {
+    private static void loadTemplates() throws Exception {
         TemplateService templateService = (TemplateService) XMLUtilities.loadFromXml(TemplateService.class, TEMPLATE_FILE);
         if (templateService != null) {
             templateService.getTemplateMap().entrySet().forEach(descriptionTemplateEntry ->
-                    mainAppController.getNavigationTree().getTemplateRootNode().getChildren().add(new TemplateNode(descriptionTemplateEntry.getValue())));
+                    NavigationTree.getInstance().getTemplateRootNode().getChildren().add(new TemplateNode(descriptionTemplateEntry.getValue())));
             TemplateService.getInstance().setTemplateMap(templateService.getTemplateMap());
             logger.trace("шаблоны загружены");
         }
     }
 
-    private static void loadGlossaries(MainAppController mainAppController) throws Exception {
+    private static void loadGlossaries() throws Exception {
         GlossaryService glossaryService = (GlossaryService) XMLUtilities.loadFromXml(GlossaryService.class, GLOSSARY_FILE);
         if (glossaryService != null) {
             glossaryService.getGlossaryMap().entrySet().forEach(glossaryEntry ->
-                    mainAppController.getNavigationTree().getGlossaryRootNode().getChildren().add(new GlossaryNode(glossaryEntry.getValue())));
+                    NavigationTree.getInstance().getGlossaryRootNode().getChildren().add(new GlossaryNode(glossaryEntry.getValue())));
             GlossaryService.getInstance().setGlossaryMap(glossaryService.getGlossaryMap());
             logger.trace("словари загружены");
         }
     }
 
-    private static void loadFilesInfo(MainAppController mainAppController) throws Exception {
+    private static void loadFilesInfo() throws Exception {
         ExcelFileService excelFileService = (ExcelFileService) XMLUtilities.loadFromXml(ExcelFileService.class, FILES_FILE);
         if (excelFileService != null) {
             excelFileService.getFileMap().entrySet().forEach(fileEntry -> {
@@ -93,7 +93,7 @@ public class XMLUtilities {
                         fileNode.getChildren().add(new PropertyNode(property));
                     }
 
-                    mainAppController.getNavigationTree().getFileRootNode().getChildren().add(fileNode);
+                    NavigationTree.getInstance().getFileRootNode().getChildren().add(fileNode);
                 } catch (Exception e) {
                     logger.error("Ошибка парсинга столбцов при работе с файлом: '{}'", e.getMessage(), e);
                     Dialogs.showMessage("Ошибка парсинга столбцов при работе с файлом", e.getMessage());

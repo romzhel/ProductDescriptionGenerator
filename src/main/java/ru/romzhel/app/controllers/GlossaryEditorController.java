@@ -5,12 +5,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
 import ru.romzhel.app.entities.StringGlossary;
 import ru.romzhel.app.nodes.GlossaryNode;
 import ru.romzhel.app.nodes.GlossaryRootNode;
 import ru.romzhel.app.nodes.Node;
-import ru.romzhel.app.nodes.TemplateNode;
 import ru.romzhel.app.services.GlossaryService;
 import ru.romzhel.app.ui_components.Dialogs;
 
@@ -35,20 +33,8 @@ public class GlossaryEditorController implements Initializable, NodeController<M
                 return;
             }
 
-            StringGlossary stringGlossary = new StringGlossary();
-            stringGlossary.setName(tfName.getText());
-            stringGlossary.setGlossaryItems(GlossaryService.getInstance().convertToList(taItems.getText()));
-
             if (instigatorNode instanceof GlossaryRootNode) {
-                mainAppController.getNavigationTree().getGlossaryRootNode().getChildren().add(new GlossaryNode(stringGlossary));
-                GlossaryService.getInstance().getGlossaryMap().put(stringGlossary.getName(), stringGlossary);
-
-                ((GlossaryRootNode) instigatorNode).setData(new StringGlossary());
-                tfName.setText("");
-                taItems.setText("");
-            } else if (instigatorNode instanceof GlossaryNode) {
-                ((GlossaryNode) instigatorNode).setData(stringGlossary);
-                GlossaryService.getInstance().getGlossaryMap().put(stringGlossary.getName(), stringGlossary);
+                GlossaryService.getInstance().addGlossaryFromRootData((GlossaryRootNode) instigatorNode);
             }
         });
 
@@ -58,12 +44,7 @@ public class GlossaryEditorController implements Initializable, NodeController<M
 
         tfName.textProperty().addListener((observable, oldValue, newValue) -> {
             ((GlossaryNode) instigatorNode).getData().setName(tfName.getText());
-            if (instigatorNode instanceof TemplateNode) {
-                ((TreeItem<String>) instigatorNode).setValue(null);
-                ((TreeItem<String>) instigatorNode).setValue(tfName.getText());
-            }
         });
-
     }
 
     @Override

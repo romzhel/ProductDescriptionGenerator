@@ -25,4 +25,8 @@ public class TemplateService {
         }
         return instance;
     }
+
+    public void addTemplate(DescriptionTemplate template) {
+
+    }
 }

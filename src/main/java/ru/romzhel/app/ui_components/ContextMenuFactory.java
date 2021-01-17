@@ -43,8 +43,7 @@ public class ContextMenuFactory {
                 }
             };
 
-            NavigationTree navigationTree = NavigationTreeService.getInstance().getMainAppController().getNavigationTree();
-            navigationTree.getSelectionModel().selectedItemProperty().addListener(changeSelectionListener);
+            NavigationTree.getInstance().getSelectionModel().selectedItemProperty().addListener(changeSelectionListener);
 
             if (treeItem instanceof TemplateNode) {
                 DescriptionTemplate deletedTemplate = TemplateService.getInstance().getTemplateMap().remove(((TemplateNode) treeItem).getName());
@@ -63,7 +62,7 @@ public class ContextMenuFactory {
             }
 
             treeItem.getParent().getChildren().remove(treeItem);
-            navigationTree.getSelectionModel().selectedItemProperty().removeListener(changeSelectionListener);
+            NavigationTree.getInstance().getSelectionModel().selectedItemProperty().removeListener(changeSelectionListener);
         });
         return menuItem;
     }

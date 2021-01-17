@@ -7,7 +7,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.romzhel.app.controllers.MainAppController;
 import ru.romzhel.app.controllers.NodeController;
+import ru.romzhel.app.nodes.FileNode;
+import ru.romzhel.app.nodes.GlossaryNode;
 import ru.romzhel.app.nodes.Node;
+import ru.romzhel.app.nodes.TemplateNode;
+import ru.romzhel.app.ui_components.NavigationTree;
 
 import java.io.IOException;
 
@@ -51,6 +55,18 @@ public class NavigationTreeService {
         } catch (IOException e) {
             logger.error("Ошибка загрузки UI: {}", e.getMessage(), e);
         }
+    }
+
+    public void addTemplateNode(TemplateNode templateNode) {
+        NavigationTree.getInstance().getTemplateRootNode().getChildren().add(templateNode);
+    }
+
+    public void addGlossaryNode(GlossaryNode glossaryNode) {
+        NavigationTree.getInstance().getGlossaryRootNode().getChildren().add(glossaryNode);
+    }
+
+    public void addFileNode(FileNode fileNode) {
+        NavigationTree.getInstance().getFileRootNode().getChildren().add(fileNode);
     }
 
 }

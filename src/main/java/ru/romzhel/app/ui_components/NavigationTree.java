@@ -21,6 +21,7 @@ import java.util.Objects;
 @Getter
 public class NavigationTree extends TreeView<String> {
     public static final Logger logger = LogManager.getLogger(NavigationTree.class);
+    private static NavigationTree instance;
     private static final String DROP_HINT_STYLE = "-fx-border-color: #eea82f; -fx-border-width: 0 0 2 0; -fx-padding: 3 3 1 3;";
     private final TemplateRootNode templateRootNode = new TemplateRootNode();
     private final GlossaryRootNode glossaryRootNode = new GlossaryRootNode();
@@ -29,7 +30,19 @@ public class NavigationTree extends TreeView<String> {
     private TreeItem<String> draggedItem;
     private TreeCell<String> dropZone;
 
-    public NavigationTree(Pane parent) {
+    public static NavigationTree init(Pane parent) {
+        instance = new NavigationTree(parent);
+        return instance;
+    }
+
+    public static NavigationTree getInstance() throws RuntimeException {
+        if (instance == null) {
+            throw new RuntimeException("Навигационное дерево не инициализировано!!!");
+        }
+        return instance;
+    }
+
+    private NavigationTree(Pane parent) {
         super();
         rootNode.getChildren().addAll(templateRootNode, glossaryRootNode, fileRootNode);
         setRoot(rootNode);
@@ -133,5 +146,9 @@ public class NavigationTree extends TreeView<String> {
         if (dropZone != null) {
             dropZone.setStyle(dropZone.getStyle().replaceAll(" " + DROP_HINT_STYLE, ""));
         }
+    }
+
+    public TreeItem<String> getSelectedItem() {
+        return getSelectionModel().getSelectedItem();
     }
 }

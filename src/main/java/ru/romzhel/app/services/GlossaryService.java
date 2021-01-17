@@ -2,6 +2,8 @@ package ru.romzhel.app.services;
 
 import lombok.Data;
 import ru.romzhel.app.entities.StringGlossary;
+import ru.romzhel.app.nodes.GlossaryNode;
+import ru.romzhel.app.nodes.GlossaryRootNode;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -33,5 +35,17 @@ public class GlossaryService {
         return Arrays.stream(planText.split("\n"))
                 .filter(line -> !String.valueOf(line).isEmpty())
                 .collect(Collectors.toList());
+    }
+
+    public void addGlossaryFromRootData(GlossaryRootNode glossaryRootNode) {
+        addGlossary(glossaryRootNode.getData());
+
+        glossaryRootNode.setData(new StringGlossary());
+        NavigationTreeService.getInstance().navigateTo(glossaryRootNode);
+    }
+
+    public void addGlossary(StringGlossary glossary) {
+        NavigationTreeService.getInstance().addGlossaryNode(new GlossaryNode(glossary));
+        glossaryMap.put(glossary.getName(), glossary);
     }
 }

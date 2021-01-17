@@ -27,20 +27,19 @@ public class MainAppController implements Initializable {
     AnchorPane apNavi;
     @FXML
     AnchorPane apWorkPane;
-    private NavigationTree navigationTree;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         NavigationTreeService.init(this);
-        navigationTree = new NavigationTree(apNavi);
+        NavigationTree.init(apNavi);
 
-        navigationTree.setOnMouseClicked(event -> {
-            Node<?> node = (Node<?>) navigationTree.getSelectionModel().getSelectedItem();
+        NavigationTree.getInstance().setOnMouseClicked(event -> {
+            Node<?> node = (Node<?>) NavigationTree.getInstance().getSelectedItem();
             NavigationTreeService.getInstance().navigateTo(node);
         });
 
         try {
-            XMLUtilities.loadAll(this);
+            XMLUtilities.loadAll();
         } catch (Exception e) {
             logger.error("Ошибка загрузки сохраненных данных: {}", e.getMessage(), e);
             Dialogs.showMessage("Ошибка загрузки данных рабочей среды", e.getMessage());

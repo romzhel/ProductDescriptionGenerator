@@ -14,6 +14,7 @@ import ru.romzhel.app.entities.DescriptionTemplate;
 import ru.romzhel.app.nodes.Node;
 import ru.romzhel.app.nodes.TemplateNode;
 import ru.romzhel.app.nodes.TemplateRootNode;
+import ru.romzhel.app.services.NavigationTreeService;
 import ru.romzhel.app.services.TemplateService;
 import ru.romzhel.app.ui_components.Dialogs;
 import ru.romzhel.app.ui_components.TemplateContentEditor;
@@ -79,22 +80,13 @@ public class TemplateEditorController implements Initializable, NodeController<M
                 return;
             }
 
-            /*descriptionTemplate.setName(tfTemplateName.getText());
-            descriptionTemplate.setLinkedFileName(tfTemplateLink.getText());
-            descriptionTemplate.setContent(contentEditor.getText());*/
-
-            if (instigatorNode instanceof TemplateRootNode) {
+            if (instigatorNode instanceof TemplateRootNode) {//todo переделать на TemplateService как сделано в GlossaryService
                 TemplateNode newNode = new TemplateNode(descriptionTemplate);
-                mainAppController.getNavigationTree().getTemplateRootNode().getChildren().add(newNode);
+                NavigationTreeService.getInstance().addTemplateNode(newNode);
                 TemplateService.getInstance().getTemplateMap().put(descriptionTemplate.getName(), descriptionTemplate);
 
                 ((TemplateRootNode) instigatorNode).setData(new DescriptionTemplate());
-                tfTemplateName.setText("");
-                tfTemplateLink.setText("");
-                contentEditor.clear();
-            } else if (instigatorNode instanceof TemplateNode) {
-                ((TemplateNode) instigatorNode).setData(descriptionTemplate);
-                TemplateService.getInstance().getTemplateMap().put(descriptionTemplate.getName(), descriptionTemplate);
+                NavigationTreeService.getInstance().navigateTo(instigatorNode);
             }
         });
     }
