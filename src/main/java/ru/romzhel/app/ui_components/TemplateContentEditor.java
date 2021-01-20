@@ -12,11 +12,13 @@ import org.fxmisc.richtext.model.StyleSpans;
 import org.fxmisc.richtext.model.StyleSpansBuilder;
 import org.reactfx.Subscription;
 import ru.romzhel.app.entities.DescriptionTemplate;
+import ru.romzhel.app.entities.ProductGroup;
 import ru.romzhel.app.entities.Property;
 import ru.romzhel.app.entities.StringGlossary;
+import ru.romzhel.app.nodes.PropertyNode;
 import ru.romzhel.app.services.ExcelFileService;
 import ru.romzhel.app.services.GlossaryService;
-import ru.romzhel.app.services.PropertyService;
+import ru.romzhel.app.utils.DragDropUtils;
 import ru.romzhel.app.utils.ExcelInputFile;
 
 import java.time.Duration;
@@ -27,6 +29,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static ru.romzhel.app.utils.DragDropUtils.SOURCE_NODE_TYPE;
+import static ru.romzhel.app.utils.DragDropUtils.VALUE;
 
 public class TemplateContentEditor extends CodeArea {
     public static final Logger logger = LogManager.getLogger(TemplateContentEditor.class);
@@ -74,8 +79,10 @@ public class TemplateContentEditor extends CodeArea {
             }
         });
 
+        DragDropUtils dragDropUtils = new DragDropUtils();
+
         setOnDragOver((DragEvent e) -> {
-            if (e.getDragboard().hasString()) {
+            if (e.getDragboard().hasString() && dragDropUtils.dropContentEditorFilter(e.getDragboard().getString())) {
                 e.acceptTransferModes(TransferMode.ANY);
             }
 
@@ -86,7 +93,10 @@ public class TemplateContentEditor extends CodeArea {
             Dragboard dragboard = e.getDragboard();
             boolean success = false;
             if (dragboard.hasString()) {
-                appendText("{" + dragboard.getString() + "}");
+                String targetType = dragDropUtils.parseDropData(dragboard.getString()).get(SOURCE_NODE_TYPE);
+                String value = dragDropUtils.parseDropData(dragboard.getString()).get(VALUE);
+                appendText(String.format("{%s}", targetType.equals(PropertyNode.class.getSimpleName()) ?
+                        value.replaceAll("\\s(.+)$", "") : value));
                 success = true;
             }
 
@@ -101,17 +111,26 @@ public class TemplateContentEditor extends CodeArea {
         StyleSpansBuilder<Collection<String>> spansBuilder = new StyleSpansBuilder<>();
         while (matcher.find()) {
             String variableText = matcher.group(1);
+            String styleClass = null;
             StringGlossary glossary = GlossaryService.getInstance().getGlossaryMap().get(variableText);
 
-            String fileName = template.getLinkedNodeName();
-            ExcelInputFile excelInputFile = (ExcelInputFile) ExcelFileService.getInstance().getFileMap().get(fileName);
-            Property property = excelInputFile != null ?
-                    PropertyService.getInstance().getProperty(excelInputFile, variableText) : null;
+            if (glossary != null) {
+                styleClass = "glossary";
+            } else {
+                String[] linkParts = template.getLinkedNodeName().split(" > ");
+                ExcelInputFile excelInputFile = ExcelFileService.getInstance().getFileMap().get(linkParts[0]);
 
-            String styleClass = glossary != null ? "glossary" :
-                    excelInputFile == null || property == null ? "error" :
+                try {
+                    ProductGroup productGroup = excelInputFile.getProductGroupMap().get(linkParts[1]);
+                    Property property = productGroup.getPropertyMap().get(variableText);
+
+                    styleClass = property == null ? "error" :
                             property.getOccurrencesCount() == property.getMaxOccurrencesCount() ? "property-full" : "property-partial";
-            assert styleClass != null;
+                } catch (Exception e) {
+                    styleClass = "error";
+                }
+            }
+
             spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
             spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
             lastKwEnd = matcher.end();

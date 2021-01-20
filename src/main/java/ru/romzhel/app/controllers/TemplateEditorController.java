@@ -14,11 +14,15 @@ import ru.romzhel.app.entities.DescriptionTemplate;
 import ru.romzhel.app.nodes.AbstractNode;
 import ru.romzhel.app.nodes.TemplateNode;
 import ru.romzhel.app.nodes.TemplateRootNode;
+import ru.romzhel.app.services.ExcelFileService;
 import ru.romzhel.app.services.NavigationTreeService;
 import ru.romzhel.app.services.TemplateService;
 import ru.romzhel.app.ui_components.Dialogs;
 import ru.romzhel.app.ui_components.TemplateContentEditor;
+import ru.romzhel.app.utils.DragDropUtils;
+import ru.romzhel.app.utils.FileUtils;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,6 +34,8 @@ public class TemplateEditorController implements Initializable, NodeController<M
     TextField tfTemplateLink;
     @FXML
     Button btnSave;
+    @FXML
+    Button btnOpenFile;
     private MainAppController mainAppController;
     private AbstractNode<?> instigatorNode;
     private TemplateContentEditor contentEditor;
@@ -37,9 +43,10 @@ public class TemplateEditorController implements Initializable, NodeController<M
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         contentEditor = new TemplateContentEditor((AnchorPane) btnSave.getParent());
+        DragDropUtils dragDropUtils = new DragDropUtils();
 
         tfTemplateLink.setOnDragOver((DragEvent e) -> {
-            if (e.getDragboard().hasString()) {
+            if (e.getDragboard().hasString() && dragDropUtils.dropLinkFilter(e.getDragboard().getString())) {
                 e.acceptTransferModes(TransferMode.ANY);
             }
 
@@ -50,7 +57,9 @@ public class TemplateEditorController implements Initializable, NodeController<M
             Dragboard dragboard = e.getDragboard();
             boolean success = false;
             if (dragboard.hasString()) {
-                tfTemplateLink.setText(dragboard.getString());
+                tfTemplateLink.setText(String.format("%s > %s",
+                        dragDropUtils.parseDropData(dragboard.getString()).get(DragDropUtils.SOURCE_PARENT_NAME),
+                        dragDropUtils.parseDropData(dragboard.getString()).get(DragDropUtils.VALUE)));
                 success = true;
             }
 
@@ -88,6 +97,17 @@ public class TemplateEditorController implements Initializable, NodeController<M
                 ((TemplateRootNode) instigatorNode).setData(new DescriptionTemplate());
                 NavigationTreeService.getInstance().navigateTo(instigatorNode);
             }
+        });
+
+        btnOpenFile.setOnAction(event -> {
+            if (tfTemplateLink.getText().trim().isEmpty()) {
+                Dialogs.showMessage("Открытие файла", "Не удалось открыть файл, так как он не указан");
+                return;
+            }
+
+            String[] linkParts = tfTemplateLink.getText().split(" > ");
+            File file = ExcelFileService.getInstance().getFileMap().get(linkParts[0]).getFile();
+            FileUtils.openFile(file);
         });
     }
 

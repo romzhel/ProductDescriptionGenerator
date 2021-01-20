@@ -42,7 +42,8 @@ public class ProductGroupService {
     }
 
     private ProductGroup parseProductGroup(int groupColumn, List<String> titles, Map.Entry<String, Set<Row>> rowGroupEntry) {
-        String productGroupName = titles.get(groupColumn).concat(": ").concat(rowGroupEntry.getKey());
+        String simpleGroupName = groupColumn < 0 ? ExcelFileService.DEFAULT_GROUP_NAME : titles.get(groupColumn);
+        String productGroupName = simpleGroupName.concat(": ").concat(rowGroupEntry.getKey());
         ProductGroup productGroup = new ProductGroup(productGroupName);
         for (int colIndex = 0; colIndex < titles.size(); colIndex++) {
             if (colIndex == groupColumn) {
@@ -58,8 +59,10 @@ public class ProductGroupService {
                 }
             }
 
-            property.setMaxOccurrencesCount(rowGroupEntry.getValue().size());
-            productGroup.getPropertyMap().put(property.getName(), property);
+            if (property.getOccurrencesCount() > 0) {
+                property.setMaxOccurrencesCount(rowGroupEntry.getValue().size());
+                productGroup.getPropertyMap().put(property.getName(), property);
+            }
         }
         return productGroup;
     }

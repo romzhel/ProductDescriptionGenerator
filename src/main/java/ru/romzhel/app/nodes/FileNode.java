@@ -1,8 +1,10 @@
 package ru.romzhel.app.nodes;
 
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.SeparatorMenuItem;
 import ru.romzhel.app.services.ExcelFileService;
 import ru.romzhel.app.ui_components.MenuItemDelete;
+import ru.romzhel.app.ui_components.MenuItemOpenFile;
 import ru.romzhel.app.utils.ExcelInputFile;
 
 import java.io.File;
@@ -31,7 +33,7 @@ public class FileNode extends AbstractNode<ExcelInputFile> {
 
     @Override
     public ContextMenu getContextMenu() {
-        return new ContextMenu(new MenuItemDelete(this));
+        return new ContextMenu(new MenuItemOpenFile(this), new SeparatorMenuItem(), new MenuItemDelete(this));
     }
 
     @Override

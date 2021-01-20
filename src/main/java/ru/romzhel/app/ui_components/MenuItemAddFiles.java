@@ -32,7 +32,7 @@ public class MenuItemAddFiles extends MenuItem {
 //                    ExcelFileService.getInstance().parseSingleProductGroupMap(fileNode.getData());
                     NavigationTreeService.getInstance().addFileNode(fileNode);
                 } catch (Throwable e) {
-                    logger.error("Ошибка открытия файла: '{}'", e.getMessage());
+                    logger.error("Ошибка открытия файла: '{}'", e.getMessage(), e);
                     Dialogs.showMessage("Ошибка открытия файла", e.getMessage());
                 }
             }

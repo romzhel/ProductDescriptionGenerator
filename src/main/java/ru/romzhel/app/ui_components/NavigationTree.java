@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.romzhel.app.nodes.*;
 import ru.romzhel.app.services.NavigationTreeService;
+import ru.romzhel.app.utils.DragDropUtils;
 
 import java.util.Objects;
 
@@ -41,9 +42,11 @@ public class NavigationTree extends TreeView<String> {
         AnchorPane.setBottomAnchor(this, 0.0);
         AnchorPane.setTopAnchor(this, 0.0);
 
+        DragDropUtils dragDropUtils = new DragDropUtils();
+
         setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
             public TreeCell<String> call(TreeView<String> param) {
-                final TreeCell<String> source = new TreeCell<String>() {
+                final TreeCell<String> treecell = new TreeCell<String>() {
                     @Override
                     protected void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
@@ -60,38 +63,40 @@ public class NavigationTree extends TreeView<String> {
                     }
                 };
 
-                source.setOnDragDetected(event -> {
+                treecell.setOnDragDetected(event -> {
                     logger.trace("navi tree OnDragDetected");
-                    draggedItem = source.getTreeItem();
-                    Dragboard dragboard = source.startDragAndDrop(TransferMode.ANY);
+                    draggedItem = treecell.getTreeItem();
+                    Dragboard dragboard = treecell.startDragAndDrop(TransferMode.ANY);
                     ClipboardContent content = new ClipboardContent();
-                    content.putString(source.getText());
+                    String dragContent = dragDropUtils.buildDragData(treecell);
+                    logger.trace("drag & drop info: {}", dragContent);
+                    content.putString(dragContent);
                     dragboard.setContent(content);
-                    dragboard.setDragView(source.snapshot(null, null));
+                    dragboard.setDragView(treecell.snapshot(null, null));
 
                     event.consume();
                 });
 
-                source.setOnDragOver((DragEvent event) -> {
+                treecell.setOnDragOver((DragEvent event) -> {
                     if (!event.getDragboard().hasString()) {
                         return;
                     }
 
-                    TreeItem thisItem = source.getTreeItem();
-//                    if (draggedItem == null || !(thisItem instanceof PropertyNode) || draggedItem == thisItem) {
-                    if (draggedItem == null || thisItem == null || draggedItem == thisItem) {
+                    TreeItem<String> thisItem = treecell.getTreeItem();
+                    if (draggedItem == null || thisItem == null || draggedItem == thisItem ||
+                            !dragDropUtils.dropTreeCellFilter(treecell, event.getDragboard().getString())) {
                         return;
                     }
 
                     event.acceptTransferModes(TransferMode.MOVE);
-                    if (!Objects.equals(dropZone, source)) {
+                    if (!Objects.equals(dropZone, treecell)) {
                         clearDropLocation();
-                        dropZone = source;
+                        dropZone = treecell;
                         dropZone.setStyle(dropZone.getStyle().concat(" ").concat(DROP_HINT_STYLE));
                     }
                 });
 
-                source.setOnDragDropped((DragEvent event) -> {
+                treecell.setOnDragDropped((DragEvent event) -> {
                     logger.trace("navi tree OnDragDropped");
                     Dragboard db = event.getDragboard();
                     boolean success = false;
@@ -99,8 +104,8 @@ public class NavigationTree extends TreeView<String> {
                         return;
                     }
 
-                    TreeItem thisItem = source.getTreeItem();
-                    TreeItem droppedItemParent = draggedItem.getParent();
+                    TreeItem<String> thisItem = treecell.getTreeItem();
+                    TreeItem<String> droppedItemParent = draggedItem.getParent();
 
                     // remove from previous location
                     droppedItemParent.getChildren().remove(draggedItem);
@@ -118,15 +123,15 @@ public class NavigationTree extends TreeView<String> {
                     event.setDropCompleted(success);
                 });
 
-                source.setOnDragDone((DragEvent event) -> {
+                treecell.setOnDragDone((DragEvent event) -> {
                     logger.trace("navi tree OnDragDone");
                     clearDropLocation();
-                    if (source.getTreeItem() instanceof PropertyNode) {
-                        NavigationTreeService.getInstance().reorderPropertyNodes((ProductGroupNode) source.getTreeItem().getParent());
+                    if (treecell.getTreeItem() instanceof PropertyNode) {
+                        NavigationTreeService.getInstance().reorderPropertyNodes((ProductGroupNode) treecell.getTreeItem().getParent());
                     }
                 });
 
-                return source;
+                return treecell;
             }
         });
     }
