@@ -69,6 +69,7 @@ public class TemplateEditorController implements Initializable, NodeController<M
 
         tfTemplateName.textProperty().addListener((observable, oldValue, newValue) -> {
             ((TemplateNode) instigatorNode).getData().setName(newValue);
+            instigatorNode.setValue(newValue);
         });
 
         tfTemplateLink.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -125,7 +126,7 @@ public class TemplateEditorController implements Initializable, NodeController<M
             tfTemplateLink.setText(descriptionTemplate.getLinkedNodeName());
         }
 
-        tfTemplateName.setEditable(instigatorNode instanceof TemplateRootNode);
+        tfTemplateName.setEditable(instigatorNode instanceof TemplateRootNode);//todo реализовать изменение имени с защитой от дублирования
         btnSave.setDisable(!(instigatorNode instanceof TemplateRootNode));
 
         mainController.closeProperty.addListener((observable, oldValue, newValue) -> {

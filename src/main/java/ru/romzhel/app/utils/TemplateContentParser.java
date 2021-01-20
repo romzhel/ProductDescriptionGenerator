@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class TemplateContentParser {
     private final String PATTERN = "[{](.+?)[}]";
 
-    public List<String> parseContent(String content) {
+    public List<String> parseSubstitutions(String content) {
         Pattern pattern = Pattern.compile(PATTERN);
         Matcher matcher = pattern.matcher(content);
 

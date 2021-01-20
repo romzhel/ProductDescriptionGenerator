@@ -77,7 +77,7 @@ public class NavigationTreeService {
             ProductGroupNode productGroupNode = new ProductGroupNode(productGroup);
             fileNode.getChildren().add(productGroupNode);
 
-            for (Property property : productGroup.getPropertyMap().values()) {
+            for (Property property : PropertyService.getInstance().getPropertiesByOrder(productGroup.getPropertyMap())) {
                 productGroupNode.getChildren().add(new PropertyNode(property));
             }
         }

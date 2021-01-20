@@ -43,7 +43,8 @@ public class GlossaryEditorController implements Initializable, NodeController<M
         });
 
         tfName.textProperty().addListener((observable, oldValue, newValue) -> {
-            ((GlossaryNode) instigatorNode).getData().setName(tfName.getText());
+            ((GlossaryNode) instigatorNode).getData().setName(newValue);
+            instigatorNode.setValue(newValue);
         });
     }
 
@@ -59,7 +60,7 @@ public class GlossaryEditorController implements Initializable, NodeController<M
             taItems.setText(String.join("\n", stringGlossary.getGlossaryItems()));
         }
 
-        tfName.setEditable(instigatorNode instanceof GlossaryRootNode);
+        tfName.setEditable(instigatorNode instanceof GlossaryRootNode);//todo реализовать изменение имени с защитой от дублирования
         btnSave.setDisable(!(instigatorNode instanceof GlossaryRootNode));
     }
 }

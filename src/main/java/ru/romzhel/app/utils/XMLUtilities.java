@@ -64,8 +64,7 @@ public class XMLUtilities {
     private static void loadTemplates() throws Exception {
         TemplateService templateService = (TemplateService) XMLUtilities.loadFromXml(TemplateService.class, TEMPLATE_FILE);
         if (templateService != null) {
-            templateService.getTemplateMap().entrySet().forEach(descriptionTemplateEntry ->
-                    NavigationTree.getInstance().getTemplateRootNode().getChildren().add(new TemplateNode(descriptionTemplateEntry.getValue())));
+            templateService.getTemplateMap().forEach((key, value) -> NavigationTree.getInstance().getTemplateRootNode().getChildren().add(new TemplateNode(value)));
             TemplateService.getInstance().setTemplateMap(templateService.getTemplateMap());
             logger.trace("шаблоны загружены");
         }
@@ -74,8 +73,7 @@ public class XMLUtilities {
     private static void loadGlossaries() throws Exception {
         GlossaryService glossaryService = (GlossaryService) XMLUtilities.loadFromXml(GlossaryService.class, GLOSSARY_FILE);
         if (glossaryService != null) {
-            glossaryService.getGlossaryMap().entrySet().forEach(glossaryEntry ->
-                    NavigationTree.getInstance().getGlossaryRootNode().getChildren().add(new GlossaryNode(glossaryEntry.getValue())));
+            glossaryService.getGlossaryMap().forEach((key, value) -> NavigationTree.getInstance().getGlossaryRootNode().getChildren().add(new GlossaryNode(value)));
             GlossaryService.getInstance().setGlossaryMap(glossaryService.getGlossaryMap());
             logger.trace("словари загружены");
         }
@@ -84,9 +82,9 @@ public class XMLUtilities {
     private static void loadFilesInfo() throws Exception {
         ExcelFileService excelFileService = (ExcelFileService) XMLUtilities.loadFromXml(ExcelFileService.class, FILES_FILE);
         if (excelFileService != null) {
-            excelFileService.getFileMap().entrySet().forEach(fileEntry -> {
+            excelFileService.getFileMap().forEach((key, value) -> {
                 try {
-                    FileNode fileNode = new FileNode(fileEntry.getValue());
+                    FileNode fileNode = new FileNode(value);
                     NavigationTreeService.getInstance().addFileNode(fileNode);
                 } catch (Throwable e) {
                     logger.error("Ошибка парсинга столбцов при работе с файлом: '{}'", e.getMessage(), e);

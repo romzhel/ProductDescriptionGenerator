@@ -16,6 +16,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.apache.poi.ss.usermodel.CellType.FORMULA;
 import static org.apache.poi.ss.usermodel.CellType.STRING;
 
 public class DescriptionGenerator {
@@ -37,7 +38,7 @@ public class DescriptionGenerator {
             throw new RuntimeException("Не найден столбец-идентификатор с Артикулом");
         }
 
-        List<String> parsedContent = new TemplateContentParser().parseContent(templateNode.getData().getContent());
+        List<String> parsedContent = new TemplateContentParser().parseSubstitutions(templateNode.getData().getContent());
         List<String> values = new ArrayList<>();
 
         ExcelFile excelOutputFile = new ExcelFile();
@@ -53,8 +54,21 @@ public class DescriptionGenerator {
         cell = outputRow.createCell(1, STRING);
         cell.setCellValue("Детальное описание (html)");
 
+
+        String groupPropertyName = linkParts[1].split("\\:\\s")[0];
+        String groupPropertyValue = linkParts[1].split("\\:\\s")[1];
+        List<String> titles = ExcelFileService.getInstance().parseTitles(excelInputFile.getSheet().getRow(0));
+        int groupColIndex = titles.indexOf(groupPropertyName);
+
         for (int i = 1; i < excelInputFile.sheet.getLastRowNum(); i++) {
             inputRow = excelInputFile.sheet.getRow(i);
+
+            //отвечает ли позиция
+            if (groupColIndex >= 0 && !inputRow.getCell(groupColIndex).toString().equals(groupPropertyValue)) {
+                continue;
+            }
+
+            ExcelUtils excelUtils = new  ExcelUtils();
 
             values.clear();
             for (int v = 1; v < parsedContent.size(); v++) {
@@ -75,8 +89,8 @@ public class DescriptionGenerator {
 
                 int colIndex = property.getColumnIndex();
 
-                if (inputRow.getCell(colIndex) != null && !inputRow.getCell(colIndex).toString().isEmpty()) {
-                    values.add(templateContentCorrector.correctStringProperty(inputRow.getCell(colIndex).toString()));
+                if ((cell = inputRow.getCell(colIndex)) != null && !cell.toString().isEmpty()) {
+                    values.add(templateContentCorrector.correctStringProperty(excelUtils.getStringValue(cell)));
                 } else {
                     values.add(EMPTY);
                 }

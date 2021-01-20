@@ -6,7 +6,7 @@
 
     <groupId>ru.romzhel</groupId>
     <artifactId>ProductDescriptionGenerator</artifactId>
-    <version>0.4</version>
+    <version>0.5</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <poi.version>3.17</poi.version>
         <!--        <poi.version>4.1.2</poi.version>-->
-        <app.date>16.01.2021</app.date>
+        <app.date>21.01.2021</app.date>
     </properties>
 
     <build>
