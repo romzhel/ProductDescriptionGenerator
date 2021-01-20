@@ -2,14 +2,12 @@ package ru.romzhel.app.utils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.romzhel.app.entities.Property;
 import ru.romzhel.app.nodes.FileNode;
 import ru.romzhel.app.nodes.GlossaryNode;
-import ru.romzhel.app.nodes.PropertyNode;
 import ru.romzhel.app.nodes.TemplateNode;
 import ru.romzhel.app.services.ExcelFileService;
 import ru.romzhel.app.services.GlossaryService;
-import ru.romzhel.app.services.PropertyService;
+import ru.romzhel.app.services.NavigationTreeService;
 import ru.romzhel.app.services.TemplateService;
 import ru.romzhel.app.ui_components.Dialogs;
 import ru.romzhel.app.ui_components.NavigationTree;
@@ -89,12 +87,8 @@ public class XMLUtilities {
             excelFileService.getFileMap().entrySet().forEach(fileEntry -> {
                 try {
                     FileNode fileNode = new FileNode(fileEntry.getValue());
-                    for (Property property : PropertyService.getInstance().getPropertiesByOrder(fileNode.getData())) {
-                        fileNode.getChildren().add(new PropertyNode(property));
-                    }
-
-                    NavigationTree.getInstance().getFileRootNode().getChildren().add(fileNode);
-                } catch (Exception e) {
+                    NavigationTreeService.getInstance().addFileNode(fileNode);
+                } catch (Throwable e) {
                     logger.error("Ошибка парсинга столбцов при работе с файлом: '{}'", e.getMessage(), e);
                     Dialogs.showMessage("Ошибка парсинга столбцов при работе с файлом", e.getMessage());
                 }

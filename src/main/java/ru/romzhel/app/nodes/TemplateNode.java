@@ -1,8 +1,10 @@
 package ru.romzhel.app.nodes;
 
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.SeparatorMenuItem;
 import ru.romzhel.app.entities.DescriptionTemplate;
-import ru.romzhel.app.ui_components.ContextMenuFactory;
+import ru.romzhel.app.ui_components.MenuItemDelete;
+import ru.romzhel.app.ui_components.MenuItemTreatSingleTemplate;
 
 public class TemplateNode extends AbstractNode<DescriptionTemplate> {
 
@@ -19,8 +21,8 @@ public class TemplateNode extends AbstractNode<DescriptionTemplate> {
 
     @Override
     public ContextMenu getContextMenu() {
-        return new ContextMenu(ContextMenuFactory.getInstance().createDeleteMenuItem(this),
-                ContextMenuFactory.getInstance().createGenerateSingleTemplateResultMenuItem(this));
+        return new ContextMenu(new MenuItemTreatSingleTemplate(this), new SeparatorMenuItem(),
+                new MenuItemDelete(this));
     }
 
     @Override

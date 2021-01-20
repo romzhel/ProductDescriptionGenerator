@@ -2,21 +2,7 @@ package ru.romzhel.app.utils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import ru.romzhel.app.entities.Property;
-import ru.romzhel.app.entities.StringGlossary;
 import ru.romzhel.app.nodes.TemplateNode;
-import ru.romzhel.app.services.ExcelFileService;
-import ru.romzhel.app.services.GlossaryService;
-import ru.romzhel.app.services.PropertyService;
-import ru.romzhel.app.ui_components.Dialogs;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.apache.poi.ss.usermodel.CellType.STRING;
 
 public class DescriptionGenerator {
     public static final Logger logger = LogManager.getLogger(DescriptionGenerator.class);
@@ -28,9 +14,12 @@ public class DescriptionGenerator {
     }
 
     public void generate(TemplateNode templateNode) throws Exception {
-        ExcelInputFile excelInputFile = (ExcelInputFile) ExcelFileService.getInstance().getFileMap().get(templateNode.getData().getLinkedFileName());
+        /*String linkedNode = templateNode.getData().getLinkedNodeName();
 
-        int articleColumnIndex = PropertyService.getInstance().getArticleColumnIndex(excelInputFile);
+        ExcelInputFile excelInputFile = ExcelFileService.getInstance().getFileMap().get(linkedFileName);
+
+        excelInputFile.open();
+        int articleColumnIndex = ExcelFileService.getInstance().getArticleColumnIndex(excelInputFile);
         if (articleColumnIndex < 0) {
             throw new RuntimeException("Не найден столбец-идентификатор с Артикулом");
         }
@@ -38,7 +27,7 @@ public class DescriptionGenerator {
         List<String> parsedContent = new TemplateContentParser().parseContent(templateNode.getData().getContent());
         List<String> values = new ArrayList<>();
 
-        excelInputFile.open();
+
         ExcelFile excelOutputFile = new ExcelFile();
         excelOutputFile.create();
 
@@ -89,6 +78,6 @@ public class DescriptionGenerator {
             Desktop.getDesktop().open(excelOutputFile.file);
         } catch (Exception e) {
             logger.warn("Ошибка сохранения: {}", e.getMessage());
-        }
+        }*/
     }
 }

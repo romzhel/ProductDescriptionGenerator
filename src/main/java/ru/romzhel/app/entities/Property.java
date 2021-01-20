@@ -1,19 +1,16 @@
 package ru.romzhel.app.entities;
 
 import lombok.Data;
-import ru.romzhel.app.enums.PropertyFilling;
-
-import static ru.romzhel.app.enums.PropertyFilling.EMPTY;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class Property {
     private String name;
     private int columnIndex;
     private int order;
-    private PropertyFilling filling = EMPTY;
-
-    public Property() {
-    }
+    private int occurrencesCount;
+    private int maxOccurrencesCount;
 
     public Property(String name, int columnIndex) {
         this.name = name;
@@ -24,5 +21,13 @@ public class Property {
         this.name = name;
         this.columnIndex = columnIndex;
         this.order = order;
+    }
+
+    public void increaseOccurrencesCount(int value) {
+        occurrencesCount += value;
+    }
+
+    public void increaseMaxOccurrencesCount(int value) {
+        maxOccurrencesCount += value;
     }
 }

@@ -14,9 +14,9 @@ import org.reactfx.Subscription;
 import ru.romzhel.app.entities.DescriptionTemplate;
 import ru.romzhel.app.entities.Property;
 import ru.romzhel.app.entities.StringGlossary;
-import ru.romzhel.app.enums.PropertyFilling;
 import ru.romzhel.app.services.ExcelFileService;
 import ru.romzhel.app.services.GlossaryService;
+import ru.romzhel.app.services.PropertyService;
 import ru.romzhel.app.utils.ExcelInputFile;
 
 import java.time.Duration;
@@ -103,13 +103,14 @@ public class TemplateContentEditor extends CodeArea {
             String variableText = matcher.group(1);
             StringGlossary glossary = GlossaryService.getInstance().getGlossaryMap().get(variableText);
 
-            String fileName = template.getLinkedFileName();
+            String fileName = template.getLinkedNodeName();
             ExcelInputFile excelInputFile = (ExcelInputFile) ExcelFileService.getInstance().getFileMap().get(fileName);
-            Property property = excelInputFile != null ? excelInputFile.getPropertyMap().get(variableText) : null;
+            Property property = excelInputFile != null ?
+                    PropertyService.getInstance().getProperty(excelInputFile, variableText) : null;
 
             String styleClass = glossary != null ? "glossary" :
                     excelInputFile == null || property == null ? "error" :
-                            property.getFilling() == PropertyFilling.FULL ? "property-full" : "property-partial";
+                            property.getOccurrencesCount() == property.getMaxOccurrencesCount() ? "property-full" : "property-partial";
             assert styleClass != null;
             spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
             spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());

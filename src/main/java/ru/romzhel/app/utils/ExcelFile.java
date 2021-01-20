@@ -9,13 +9,16 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import ru.romzhel.app.ui_components.Dialogs;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 @Data
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ExcelFile {
     public static final Logger logger = LogManager.getLogger(ExcelFile.class);

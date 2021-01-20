@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.romzhel.app.nodes.Node;
+import ru.romzhel.app.nodes.AbstractNode;
 import ru.romzhel.app.services.NavigationTreeService;
 import ru.romzhel.app.ui_components.Dialogs;
 import ru.romzhel.app.ui_components.NavigationTree;
@@ -34,7 +34,7 @@ public class MainAppController implements Initializable {
         NavigationTree.init(apNavi);
 
         NavigationTree.getInstance().setOnMouseClicked(event -> {
-            Node<?> node = (Node<?>) NavigationTree.getInstance().getSelectedItem();
+            AbstractNode<?> node = (AbstractNode<?>) NavigationTree.getInstance().getSelectedItem();
             NavigationTreeService.getInstance().navigateTo(node);
         });
 

@@ -1,7 +1,7 @@
 package ru.romzhel.app.nodes;
 
 import javafx.scene.control.ContextMenu;
-import ru.romzhel.app.ui_components.ContextMenuFactory;
+import ru.romzhel.app.ui_components.MenuItemAddFiles;
 
 public class FileRootNode extends AbstractNode<String> {
 
@@ -17,7 +17,7 @@ public class FileRootNode extends AbstractNode<String> {
 
     @Override
     public ContextMenu getContextMenu() {
-        return new ContextMenu(ContextMenuFactory.getInstance().createAddFilesMenuItem(this));
+        return new ContextMenu(new MenuItemAddFiles(this));
     }
 
     @Override

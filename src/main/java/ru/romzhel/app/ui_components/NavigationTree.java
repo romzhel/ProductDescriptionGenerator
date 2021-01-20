@@ -14,33 +14,21 @@ import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.romzhel.app.nodes.*;
-import ru.romzhel.app.services.PropertyService;
+import ru.romzhel.app.services.NavigationTreeService;
 
 import java.util.Objects;
 
 @Getter
 public class NavigationTree extends TreeView<String> {
     public static final Logger logger = LogManager.getLogger(NavigationTree.class);
-    private static NavigationTree instance;
     private static final String DROP_HINT_STYLE = "-fx-border-color: #eea82f; -fx-border-width: 0 0 2 0; -fx-padding: 3 3 1 3;";
+    private static NavigationTree instance;
     private final TemplateRootNode templateRootNode = new TemplateRootNode();
     private final GlossaryRootNode glossaryRootNode = new GlossaryRootNode();
     private final FileRootNode fileRootNode = new FileRootNode();
     private final RootNode rootNode = new RootNode();
     private TreeItem<String> draggedItem;
     private TreeCell<String> dropZone;
-
-    public static NavigationTree init(Pane parent) {
-        instance = new NavigationTree(parent);
-        return instance;
-    }
-
-    public static NavigationTree getInstance() throws RuntimeException {
-        if (instance == null) {
-            throw new RuntimeException("Навигационное дерево не инициализировано!!!");
-        }
-        return instance;
-    }
 
     private NavigationTree(Pane parent) {
         super();
@@ -61,9 +49,10 @@ public class NavigationTree extends TreeView<String> {
                         super.updateItem(item, empty);
 
                         if (item != null) {
-                            setText(item);
-                            setContextMenu(((Node<?>) getTreeItem()).getContextMenu());
-                            setStyle(((Node<?>) getTreeItem()).getStyle());
+//                            logger.debug("Отображение в дереве элемента {}: {}", getTreeItem().getClass().getSimpleName(), item);
+                            setText(((AbstractNode<?>) getTreeItem()).changeDisplayedText(item));
+                            setContextMenu(((AbstractNode<?>) getTreeItem()).getContextMenu());
+                            setStyle(((AbstractNode<?>) getTreeItem()).getStyle());
                         } else {
                             setText(null);
                             setContextMenu(null);
@@ -133,13 +122,25 @@ public class NavigationTree extends TreeView<String> {
                     logger.trace("navi tree OnDragDone");
                     clearDropLocation();
                     if (source.getTreeItem() instanceof PropertyNode) {
-                        PropertyService.getInstance().reorderProperties((FileNode) source.getTreeItem().getParent());
+                        NavigationTreeService.getInstance().reorderPropertyNodes((ProductGroupNode) source.getTreeItem().getParent());
                     }
                 });
 
                 return source;
             }
         });
+    }
+
+    public static NavigationTree init(Pane parent) {
+        instance = new NavigationTree(parent);
+        return instance;
+    }
+
+    public static NavigationTree getInstance() throws RuntimeException {
+        if (instance == null) {
+            throw new RuntimeException("Навигационное дерево не инициализировано!!!");
+        }
+        return instance;
     }
 
     private void clearDropLocation() {

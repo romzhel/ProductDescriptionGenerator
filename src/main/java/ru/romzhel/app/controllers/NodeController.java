@@ -1,7 +1,7 @@
 package ru.romzhel.app.controllers;
 
-import ru.romzhel.app.nodes.Node;
+import ru.romzhel.app.nodes.AbstractNode;
 
 public interface NodeController<T> {
-    void injectMainController(T mainController, Node<?> instigatorNode);
+    void injectMainController(T mainController, AbstractNode<?> instigatorNode);
 }

@@ -16,4 +16,6 @@ public interface Node<T> {
     String getWorkPaneFxmlPath();
 
     String getStyle();
+
+    String changeDisplayedText(String text);
 }

@@ -6,9 +6,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ru.romzhel.app.entities.StringGlossary;
+import ru.romzhel.app.nodes.AbstractNode;
 import ru.romzhel.app.nodes.GlossaryNode;
 import ru.romzhel.app.nodes.GlossaryRootNode;
-import ru.romzhel.app.nodes.Node;
 import ru.romzhel.app.services.GlossaryService;
 import ru.romzhel.app.ui_components.Dialogs;
 
@@ -23,7 +23,7 @@ public class GlossaryEditorController implements Initializable, NodeController<M
     @FXML
     Button btnSave;
     private MainAppController mainAppController;
-    private Node<?> instigatorNode;
+    private AbstractNode<?> instigatorNode;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -48,7 +48,7 @@ public class GlossaryEditorController implements Initializable, NodeController<M
     }
 
     @Override
-    public void injectMainController(MainAppController mainController, Node<?> instigatorNode) {
+    public void injectMainController(MainAppController mainController, AbstractNode<?> instigatorNode) {
         this.mainAppController = mainController;
         this.instigatorNode = instigatorNode;
 

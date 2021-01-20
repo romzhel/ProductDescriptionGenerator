@@ -2,7 +2,7 @@ package ru.romzhel.app.nodes;
 
 import javafx.scene.control.ContextMenu;
 import ru.romzhel.app.entities.StringGlossary;
-import ru.romzhel.app.ui_components.ContextMenuFactory;
+import ru.romzhel.app.ui_components.MenuItemDelete;
 
 public class GlossaryNode extends AbstractNode<StringGlossary> {
 
@@ -19,7 +19,7 @@ public class GlossaryNode extends AbstractNode<StringGlossary> {
 
     @Override
     public ContextMenu getContextMenu() {
-        return new ContextMenu(ContextMenuFactory.getInstance().createDeleteMenuItem(this));
+        return new ContextMenu(new MenuItemDelete(this));
     }
 
     @Override

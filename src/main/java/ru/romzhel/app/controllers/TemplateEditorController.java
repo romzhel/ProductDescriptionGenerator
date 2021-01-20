@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.romzhel.app.entities.DescriptionTemplate;
-import ru.romzhel.app.nodes.Node;
+import ru.romzhel.app.nodes.AbstractNode;
 import ru.romzhel.app.nodes.TemplateNode;
 import ru.romzhel.app.nodes.TemplateRootNode;
 import ru.romzhel.app.services.NavigationTreeService;
@@ -31,7 +31,7 @@ public class TemplateEditorController implements Initializable, NodeController<M
     @FXML
     Button btnSave;
     private MainAppController mainAppController;
-    private Node<?> instigatorNode;
+    private AbstractNode<?> instigatorNode;
     private TemplateContentEditor contentEditor;
 
     @Override
@@ -63,7 +63,7 @@ public class TemplateEditorController implements Initializable, NodeController<M
         });
 
         tfTemplateLink.textProperty().addListener((observable, oldValue, newValue) -> {
-            ((TemplateNode) instigatorNode).getData().setLinkedFileName(newValue);
+            ((TemplateNode) instigatorNode).getData().setLinkedNodeName(newValue);
             String content = contentEditor.getText();
             contentEditor.clear();
             contentEditor.appendText(content);
@@ -92,7 +92,7 @@ public class TemplateEditorController implements Initializable, NodeController<M
     }
 
     @Override
-    public void injectMainController(MainAppController mainController, Node<?> instigatorNode) {
+    public void injectMainController(MainAppController mainController, AbstractNode<?> instigatorNode) {
         this.mainAppController = mainController;
         this.instigatorNode = instigatorNode;
 
@@ -102,7 +102,7 @@ public class TemplateEditorController implements Initializable, NodeController<M
             logger.debug("link ContentEditor with: {}", descriptionTemplate.getName());
             contentEditor.replaceText(descriptionTemplate.getContent());
             tfTemplateName.setText(descriptionTemplate.getName());
-            tfTemplateLink.setText(descriptionTemplate.getLinkedFileName());
+            tfTemplateLink.setText(descriptionTemplate.getLinkedNodeName());
         }
 
         tfTemplateName.setEditable(instigatorNode instanceof TemplateRootNode);

@@ -12,6 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class DescriptionTemplate {
     private String name = "";
     private ProductGroup linkedGroup;
-    private String linkedFileName = "";
+    private String linkedNodeName = "";
     private String content = "";
 }

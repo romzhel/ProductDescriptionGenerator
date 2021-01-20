@@ -1,16 +1,16 @@
 package ru.romzhel.app.services;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TreeItem;
 import javafx.scene.layout.AnchorPane;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.romzhel.app.controllers.MainAppController;
 import ru.romzhel.app.controllers.NodeController;
-import ru.romzhel.app.nodes.FileNode;
-import ru.romzhel.app.nodes.GlossaryNode;
-import ru.romzhel.app.nodes.Node;
-import ru.romzhel.app.nodes.TemplateNode;
+import ru.romzhel.app.entities.ProductGroup;
+import ru.romzhel.app.entities.Property;
+import ru.romzhel.app.nodes.*;
 import ru.romzhel.app.ui_components.NavigationTree;
 
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class NavigationTreeService {
         return instance;
     }
 
-    public void navigateTo(Node<?> node) {
+    public void navigateTo(AbstractNode<?> node) {
         if (node == null || node.getWorkPaneFxmlPath() == null || node.getWorkPaneFxmlPath().isEmpty()) {
             return;
         }
@@ -67,6 +67,26 @@ public class NavigationTreeService {
 
     public void addFileNode(FileNode fileNode) {
         NavigationTree.getInstance().getFileRootNode().getChildren().add(fileNode);
+        display(fileNode);
     }
 
+    public void display(FileNode fileNode) {
+        fileNode.getChildren().clear();
+
+        for (ProductGroup productGroup : fileNode.getData().getProductGroupMap().values()) {
+            ProductGroupNode productGroupNode = new ProductGroupNode(productGroup);
+            fileNode.getChildren().add(productGroupNode);
+
+            for (Property property : productGroup.getPropertyMap().values()) {
+                productGroupNode.getChildren().add(new PropertyNode(property));
+            }
+        }
+    }
+
+    public void reorderPropertyNodes(ProductGroupNode productGroupNode) {
+        int order = 0;
+        for (TreeItem<String> childNode : productGroupNode.getChildren()) {
+            productGroupNode.getData().getPropertyMap().get(((PropertyNode) childNode).getName()).setOrder(order++);
+        }
+    }
 }
